@@ -1,6 +1,6 @@
 package by.kiselevich.taskOOP.validator;
 
-public class ChildValidator {
+public class ToyValidator {
 
     public boolean checkFirstName(String firstName) {
         return firstName != null;

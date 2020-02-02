@@ -5,8 +5,9 @@ import by.kiselevich.taskOOP.repository.ToyRepository;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.concurrent.Callable;
 
-public abstract class Child {
+public abstract class Child implements Callable<List<Toy>> {
     private String firstName;
     private String lastName;
 
@@ -68,6 +69,14 @@ public abstract class Child {
     }
 
     public abstract boolean receiveToys(ToyRepository toyRepository);
+
+    @Override
+    public List<Toy> call() throws Exception {
+        Thread.sleep(hours * 1000);
+        List<Toy> returnedToys = toys;
+        toys = null;
+        return returnedToys;
+    }
 
     protected void removeMoneyForToys() {
         BigDecimal sumToys = BigDecimal.valueOf(0);

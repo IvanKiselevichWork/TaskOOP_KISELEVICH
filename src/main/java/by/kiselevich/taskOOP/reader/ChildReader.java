@@ -8,6 +8,7 @@ import org.apache.logging.log4j.Logger;
 
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -19,7 +20,7 @@ public class ChildReader {
 
     private static final String CHILDREN_RESOURCES_FILE = "children.txt";
     private static final String DELIMITER = ";";
-    private static final String CHILDREN_FILEPATH;
+    private static final URL CHILDREN_FILEPATH;
     private static final boolean isReadingPossibly;
     private static final Logger logger = LogManager.getLogger(ChildReader.class);
 
@@ -29,7 +30,7 @@ public class ChildReader {
         Optional<URL> optional = Optional.ofNullable(
                 ChildReader.class.getClassLoader().getResource(CHILDREN_RESOURCES_FILE));
         if (optional.isPresent()) {
-            CHILDREN_FILEPATH = optional.get().toString();
+            CHILDREN_FILEPATH = optional.get();
             isReadingPossibly = true;
         } else {
             logger.warn("No children file! Child reader always return empty list!");
@@ -57,13 +58,13 @@ public class ChildReader {
             return children;
         }
         try {
-            List<String> childrenStrList = Files.readAllLines(Paths.get(CHILDREN_FILEPATH));
+            List<String> childrenStrList = Files.readAllLines(Paths.get(CHILDREN_FILEPATH.toURI()));
             for (String childStr : childrenStrList) {
                 Optional<Child> optionalChild = Optional.ofNullable(
                         parseChildFromString(childStr));
                 optionalChild.ifPresent(children::add);
             }
-        } catch (IOException e) {
+        } catch (IOException | URISyntaxException e) {
             logger.error(e);
         }
         return children;

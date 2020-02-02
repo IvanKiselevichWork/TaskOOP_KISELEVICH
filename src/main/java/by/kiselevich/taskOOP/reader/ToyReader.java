@@ -11,6 +11,7 @@ import org.apache.logging.log4j.Logger;
 
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -22,7 +23,7 @@ public class ToyReader {
 
     private static final String TOYS_RESOURCES_FILE = "toys.txt";
     private static final String DELIMITER = ";";
-    private static final String TOYS_FILEPATH;
+    private static final URL TOYS_FILEPATH;
     private static final boolean isReadingPossibly;
     private static final Logger logger = LogManager.getLogger(ToyReader.class);
 
@@ -33,7 +34,7 @@ public class ToyReader {
         Optional<URL> optional = Optional.ofNullable(
                 ToyReader.class.getClassLoader().getResource(TOYS_RESOURCES_FILE));
         if (optional.isPresent()) {
-            TOYS_FILEPATH = optional.get().toString();
+            TOYS_FILEPATH = optional.get();
             isReadingPossibly = true;
         } else {
             logger.warn("No toys file! Toy reader always return empty list!");
@@ -62,11 +63,11 @@ public class ToyReader {
             return toys;
         }
         try {
-            List<String> toysStrList = Files.readAllLines(Paths.get(TOYS_FILEPATH));
+            List<String> toysStrList = Files.readAllLines(Paths.get(TOYS_FILEPATH.toURI()));
             for (String toysStr : toysStrList) {
                 toys.addAll(parseToysFromString(toysStr));
             }
-        } catch (IOException e) {
+        } catch (IOException | URISyntaxException e) {
             logger.error(e);
         }
         return toys;

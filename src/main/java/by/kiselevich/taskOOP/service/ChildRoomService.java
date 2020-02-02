@@ -17,14 +17,11 @@ public class ChildRoomService {
 
     private static final Logger logger = LogManager.getLogger(ChildRoomService.class);
 
-    private final ChildRepository childRepository;
     private final ToyRepository toyRepository;
 
     private ChildRoomService() {
-        childRepository = ChildRepositoryFactory.getInstance().getChildRepository();
         toyRepository = ToyRepositoryFactory.getInstance().getToyRepository();
         initToys();
-        initChildren();
     }
 
     private static class ChildRoomServiceHolder {
@@ -39,9 +36,6 @@ public class ChildRoomService {
         return ChildRoomServiceHolder.instance;
     }
 
-    private void initChildren() {
-        childRepository.addChildren(ChildReader.getInstance().readChildren());
-    }
 
     private void initToys() {
         toyRepository.addToys(ToyReader.getInstance().readToys());
@@ -52,16 +46,14 @@ public class ChildRoomService {
      * @param child
      */
     public void serveChild(Child child) {
-        synchronized (toyRepository) {
-            if (child.receiveToys(toyRepository)) {
-                logger.info("Child " + child + " start");
-                try {
-                    List<Toy> returnedToys = child.call();
-                    toyRepository.addToys(returnedToys);
-                    logger.info("Child " + child + " served");
-                } catch (Exception e) {
-                    logger.error(e);
-                }
+        if (child.receiveToys(toyRepository)) {
+            logger.info("Child " + child + " start");
+            try {
+                List<Toy> returnedToys = child.call();
+                toyRepository.addToys(returnedToys);
+                logger.info("Child " + child + " served");
+            } catch (Exception e) {
+                logger.error(e);
             }
         }
     }

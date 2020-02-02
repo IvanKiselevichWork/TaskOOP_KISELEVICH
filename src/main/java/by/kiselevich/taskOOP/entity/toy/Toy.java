@@ -3,9 +3,9 @@ package by.kiselevich.taskOOP.entity.toy;
 import java.math.BigDecimal;
 
 public class Toy {
-    private ToyType toyType;
-    private ToySize size;
-    private BigDecimal cost;
+    private final ToyType toyType;
+    private final ToySize size;
+    private final BigDecimal cost;
 
     public Toy(ToyType toyType, ToySize size, BigDecimal cost) {
         this.toyType = toyType;

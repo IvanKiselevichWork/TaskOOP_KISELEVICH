@@ -8,5 +8,5 @@ public interface ChildRepository {
     void addChild(Child child);
     void removeChild(Child child);
     List<Child> getAllChildren();
-    Child getNextChild();
+    Child getChild();
 }

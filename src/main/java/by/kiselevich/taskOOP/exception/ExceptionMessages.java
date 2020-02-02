@@ -7,9 +7,9 @@ public enum ExceptionMessages {
     INVALID_LAST_NAME("Invalid last name"),
     INVALID_AGE("Invalid age");
 
-    private String message;
+    private final String message;
 
-    private ExceptionMessages(String message) {
+    ExceptionMessages(String message) {
         this.message = message;
     }
 

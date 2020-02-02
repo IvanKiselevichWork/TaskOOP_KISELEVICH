@@ -1,16 +1,21 @@
 package by.kiselevich.taskOOP.validator;
 
+import by.kiselevich.taskOOP.entity.toy.ToySize;
+import by.kiselevich.taskOOP.entity.toy.ToyType;
+
+import java.math.BigDecimal;
+
 public class ToyValidator {
 
-    public boolean checkFirstName(String firstName) {
-        return firstName != null;
+    public boolean checkToyType(ToyType toyType) {
+        return toyType != null;
     }
 
-    public boolean checkLastName(String lastName) {
-        return lastName != null;
+    public boolean checkToySize(ToySize toySize) {
+        return toySize != null;
     }
 
-    public boolean checkAge(int age) {
-        return age >= 2 && age < 15;
+    public boolean checkCost(BigDecimal cost) {
+        return cost != null && cost.compareTo(BigDecimal.valueOf(0)) > 0;
     }
 }

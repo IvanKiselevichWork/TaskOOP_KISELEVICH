@@ -1,12 +1,17 @@
 package by.kiselevich.taskOOP.entity.child;
 
 import by.kiselevich.taskOOP.entity.toy.Toy;
+import by.kiselevich.taskOOP.repository.ToyRepository;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 public abstract class Child {
     private String firstName;
     private String lastName;
+
+    protected BigDecimal budget;
+    protected int hours;
 
     protected List<Toy> toys;
 
@@ -15,6 +20,8 @@ public abstract class Child {
         private String firstName;
         private String lastName;
         private Integer age;
+        protected BigDecimal budget;
+        protected Integer hours;
 
         public Builder firstName(String firstName) {
             this.firstName = firstName;
@@ -31,6 +38,16 @@ public abstract class Child {
             return this;
         }
 
+        public Builder budget(BigDecimal budget) {
+            this.budget = budget;
+            return this;
+        }
+
+        public Builder hours(Integer hours) {
+            this.hours = hours;
+            return this;
+        }
+
         public Child build() {
             Child child;
             if (age >= 2 && age < 7) {
@@ -43,12 +60,23 @@ public abstract class Child {
             }
             child.firstName = firstName;
             child.lastName = lastName;
+            child.budget = budget;
+            child.hours = hours;
             return child;
         }
 
     }
 
-    public abstract void receiveToys();
+    public abstract boolean receiveToys(ToyRepository toyRepository);
+
+    protected void removeMoneyForToys() {
+        BigDecimal sumToys = BigDecimal.valueOf(0);
+        for (Toy toy : toys) {
+            sumToys = sumToys.add(toy.getCost());
+        }
+        sumToys = sumToys.multiply(BigDecimal.valueOf(hours));
+        budget = budget.subtract(sumToys);
+    }
 
     public String getFirstName() {
         return firstName;
@@ -58,29 +86,5 @@ public abstract class Child {
         return lastName;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
 
-        Child child = (Child) o;
-
-        if (!firstName.equals(child.firstName)) return false;
-        return lastName.equals(child.lastName);
-    }
-
-    @Override
-    public int hashCode() {
-        int result = firstName.hashCode();
-        result = 31 * result + lastName.hashCode();
-        return result;
-    }
-
-    @Override
-    public String toString() {
-        return "Child{" +
-                "firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                '}';
-    }
 }

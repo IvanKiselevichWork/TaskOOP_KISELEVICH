@@ -7,6 +7,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -70,7 +71,7 @@ public class ChildReader {
 
     private Child parseChildFromString(String string) {
         String[] childArray = string.split(DELIMITER);
-        if (childArray.length == 3) {
+        if (childArray.length == 5) {
             String firstName = childArray[0];
             String lastName = childArray[1];
             int age;
@@ -80,14 +81,32 @@ public class ChildReader {
                 logger.warn("Cannot parse child age from string");
                 return null;
             }
+            BigDecimal budget;
+            if (Utils.isStringParsableToBigDecimal(childArray[3])) {
+                budget = Utils.parseStringToBigDecimal(childArray[3]);
+            } else {
+                logger.warn("Cannot parse child budget from string");
+                return null;
+            }
+            int hours;
+            if (Utils.isStringParsableToInt(childArray[4])) {
+                hours = Utils.parseStringToInt(childArray[4]);
+            } else {
+                logger.warn("Cannot parse child age from string");
+                return null;
+            }
             if (validator.checkFirstName(firstName)
                     && validator.checkLastName(lastName)
-                    && validator.checkAge(age)) {
+                    && validator.checkAge(age)
+                    && validator.checkBudget(budget)
+                    && validator.checkHours(hours)) {
 
                 return new Child.Builder()
                         .firstName(firstName)
                         .lastName(lastName)
                         .age(age)
+                        .budget(budget)
+                        .hours(hours)
                         .build();
             } else {
                 logger.warn("Child params not pass validation");

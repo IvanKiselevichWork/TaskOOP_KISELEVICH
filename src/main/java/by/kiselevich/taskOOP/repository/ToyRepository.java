@@ -3,6 +3,7 @@ package by.kiselevich.taskOOP.repository;
 import by.kiselevich.taskOOP.entity.toy.Toy;
 import by.kiselevich.taskOOP.entity.toy.ToySize;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 public interface ToyRepository {
@@ -10,5 +11,5 @@ public interface ToyRepository {
     boolean removeToy(Toy toy);
     void addToys(List<Toy> toys);
     List<Toy> getAllToys();
-    List<Toy> getToysWithSizes(ToySize ... toySizes);
+    List<Toy> getToysForSummaryCostWithSizesAndReturnTrifle(BigDecimal cost, ToySize ... toySizes);
 }

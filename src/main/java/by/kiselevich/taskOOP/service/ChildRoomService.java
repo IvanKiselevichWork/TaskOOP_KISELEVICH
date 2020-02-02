@@ -1,5 +1,6 @@
 package by.kiselevich.taskOOP.service;
 
+import by.kiselevich.taskOOP.entity.child.Child;
 import by.kiselevich.taskOOP.factory.ChildRepositoryFactory;
 import by.kiselevich.taskOOP.factory.ToyRepositoryFactory;
 import by.kiselevich.taskOOP.reader.ChildReader;
@@ -19,10 +20,14 @@ public class ChildRoomService {
         initChildren();
     }
 
-    public static class ChildRoomServiceHolder {
+    private static class ChildRoomServiceHolder {
         public static final ChildRoomService instance = new ChildRoomService();
     }
 
+    /**
+     *
+     * @return
+     */
     public static ChildRoomService getInstance() {
         return ChildRoomServiceHolder.instance;
     }
@@ -35,5 +40,10 @@ public class ChildRoomService {
         toyRepository.addToys(ToyReader.getInstance().readToys());
     }
 
+    public void serveChild(Child child) {
+        if (child.receiveToys(toyRepository)) {
+            //todo thread
+        }
+    }
 
 }

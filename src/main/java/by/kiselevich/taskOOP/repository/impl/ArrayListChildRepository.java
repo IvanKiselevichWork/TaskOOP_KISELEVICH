@@ -16,8 +16,13 @@ public class ArrayListChildRepository implements ChildRepository {
     }
 
     @Override
-    public void removeChild(Child child) {
-        children.remove(child);
+    public boolean removeChild(Child child) {
+         return children.remove(child);
+    }
+
+    @Override
+    public void addChildren(List<Child> children) {
+        this.children.addAll(children);
     }
 
     @Override

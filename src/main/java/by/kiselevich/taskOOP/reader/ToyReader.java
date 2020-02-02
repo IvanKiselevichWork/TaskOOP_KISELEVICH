@@ -6,6 +6,8 @@ import by.kiselevich.taskOOP.entity.toy.ToySize;
 import by.kiselevich.taskOOP.entity.toy.ToyType;
 import by.kiselevich.taskOOP.factory.ToyFactory;
 import by.kiselevich.taskOOP.validator.ToyValidator;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.io.IOException;
 import java.math.BigDecimal;
@@ -22,6 +24,7 @@ public class ToyReader {
     private static final String DELIMITER = ";";
     private static final String TOYS_FILEPATH;
     private static final boolean isReadingPossibly;
+    private static final Logger logger = LogManager.getLogger(ToyReader.class);
 
     private ToyValidator validator;
     private ToyFactory toyFactory;
@@ -33,8 +36,8 @@ public class ToyReader {
             TOYS_FILEPATH = optional.get().toString();
             isReadingPossibly = true;
         } else {
-            //todo logger
-            TOYS_FILEPATH = null; //todo
+            logger.warn("No toys file! Toy reader always return empty list!");
+            TOYS_FILEPATH = null;
             isReadingPossibly = false;
         }
     }
@@ -55,6 +58,7 @@ public class ToyReader {
     public List<Toy> readToys() {
         List<Toy> toys = new ArrayList<>();
         if(!isReadingPossibly) {
+            logger.info("ToyReader return empty list");
             return toys;
         }
         try {
@@ -63,8 +67,7 @@ public class ToyReader {
                 toys.addAll(parseToysFromString(toysStr));
             }
         } catch (IOException e) {
-            //todo logger
-            e.printStackTrace();
+            logger.error(e);
         }
         return toys;
     }
@@ -80,14 +83,14 @@ public class ToyReader {
                 if(Utils.isStringParsableToBigDecimal(toyArray[2])) {
                     cost = Utils.parseStringToBigDecimal(toyArray[2]);
                 } else {
-                    //logger
+                    logger.warn("Cannot parse toy cost from string");
                     return toys;
                 }
                 int count;
                 if(Utils.isStringParsableToInt(toyArray[3])) {
                     count = Utils.parseStringToInt(toyArray[3]);
                 } else {
-                    //logger
+                    logger.warn("Cannot parse toys count from string");
                     return toys;
                 }
                 if (validator.checkToyType(toyType)
@@ -96,14 +99,13 @@ public class ToyReader {
                         && count > 0) {
                     return toyFactory.getToys(toyType, toySize, cost, count);
                 } else {
-                    //todo logger
+                    logger.warn("Toys params not pass validation");
                 }
             } else {
-                //todo logger
+                logger.warn("Toys have wrong params count");
             }
         } catch (IllegalArgumentException e) {
-            //todo logger
-            e.printStackTrace();
+            logger.error(e);
         }
         return toys;
     }

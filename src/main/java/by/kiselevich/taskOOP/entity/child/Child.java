@@ -1,8 +1,14 @@
 package by.kiselevich.taskOOP.entity.child;
 
+import by.kiselevich.taskOOP.entity.toy.Toy;
+
+import java.util.List;
+
 public abstract class Child {
-    protected String firstName;
-    protected String lastName;
+    private String firstName;
+    private String lastName;
+
+    protected List<Toy> toys;
 
     public static class Builder {
 

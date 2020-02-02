@@ -6,7 +6,8 @@ import java.util.List;
 
 public interface ChildRepository {
     void addChild(Child child);
-    void removeChild(Child child);
+    boolean removeChild(Child child);
+    void addChildren(List<Child> children);
     List<Child> getAllChildren();
     Child getChild();
 }

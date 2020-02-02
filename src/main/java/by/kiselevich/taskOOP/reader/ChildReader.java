@@ -3,6 +3,8 @@ package by.kiselevich.taskOOP.reader;
 import by.kiselevich.taskOOP.utils.Utils;
 import by.kiselevich.taskOOP.entity.child.Child;
 import by.kiselevich.taskOOP.validator.ChildValidator;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.io.IOException;
 import java.net.URL;
@@ -18,6 +20,7 @@ public class ChildReader {
     private static final String DELIMITER = ";";
     private static final String CHILDREN_FILEPATH;
     private static final boolean isReadingPossibly;
+    private static final Logger logger = LogManager.getLogger(ChildReader.class);
 
     private ChildValidator validator;
 
@@ -28,7 +31,7 @@ public class ChildReader {
             CHILDREN_FILEPATH = optional.get().toString();
             isReadingPossibly = true;
         } else {
-            //todo logger
+            logger.warn("No children file! Child reader always return empty list!");
             CHILDREN_FILEPATH = null;
             isReadingPossibly = false;
         }
@@ -49,7 +52,7 @@ public class ChildReader {
     public List<Child> readChildren() {
         List<Child> children = new ArrayList<>();
         if (!isReadingPossibly) {
-            //todo logger
+            logger.info("ChildReader return empty list!");
             return children;
         }
         try {
@@ -60,8 +63,7 @@ public class ChildReader {
                 optionalChild.ifPresent(children::add);
             }
         } catch (IOException e) {
-            //todo logger
-            e.printStackTrace();
+            logger.error(e);
         }
         return children;
     }
@@ -75,6 +77,7 @@ public class ChildReader {
             if (Utils.isStringParsableToInt(childArray[2])) {
                 age = Utils.parseStringToInt(childArray[2]);
             } else {
+                logger.warn("Cannot parse child age from string");
                 return null;
             }
             if (validator.checkFirstName(firstName)
@@ -86,7 +89,11 @@ public class ChildReader {
                         .lastName(lastName)
                         .age(age)
                         .build();
+            } else {
+                logger.warn("Child params not pass validation");
             }
+        } else {
+            logger.warn("Child have wrong params count");
         }
         return null;
     }

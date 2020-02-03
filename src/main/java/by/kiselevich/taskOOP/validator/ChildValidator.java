@@ -1,26 +1,26 @@
 package by.kiselevich.taskOOP.validator;
 
-import by.kiselevich.taskOOP.exception.ChildException;
-
-import static by.kiselevich.taskOOP.exception.ExceptionMessages.*;
+import java.math.BigDecimal;
 
 public class ChildValidator {
 
-    public void checkFirstName(String firstName) throws ChildException {
-        if (firstName == null) {
-            throw new ChildException(INVALID_FIRST_NAME.getMessage());
-        }
+    public boolean checkFirstName(String firstName) {
+        return firstName != null;
     }
 
-    public void checkLastName(String lastName) throws ChildException {
-        if (lastName == null) {
-            throw new ChildException(INVALID_LAST_NAME.getMessage());
-        }
+    public boolean checkLastName(String lastName) {
+        return lastName != null;
     }
 
-    public void checkAge(int age) throws ChildException {
-        if (age < 2 || age >= 15) {
-            throw new ChildException(INVALID_AGE.getMessage());
-        }
+    public boolean checkAge(int age) {
+        return age >= 2 && age < 15;
+    }
+
+    public boolean checkBudget(BigDecimal budget) {
+        return budget != null && budget.compareTo(BigDecimal.valueOf(0)) > 0;
+    }
+
+    public boolean checkHours(int hours) {
+        return hours > 0;
     }
 }

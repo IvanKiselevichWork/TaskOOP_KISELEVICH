@@ -8,31 +8,30 @@ import org.apache.logging.log4j.Logger;
 
 import java.math.BigDecimal;
 import java.util.*;
-import java.util.concurrent.CopyOnWriteArrayList;
 
 public class ArrayListToyRepository implements ToyRepository {
 
     private final static Logger logger = LogManager.getLogger(ArrayListToyRepository.class);
 
-    List<Toy> toys = new CopyOnWriteArrayList<>();
+    List<Toy> toys = new ArrayList<>();
 
     @Override
-    public void addToy(Toy toy) {
+    public synchronized void addToy(Toy toy) {
         toys.add(toy);
     }
 
     @Override
-    public boolean removeToy(Toy toy) {
+    public synchronized boolean removeToy(Toy toy) {
         return toys.remove(toy);
     }
 
     @Override
-    public void addToys(List<Toy> toys) {
+    public synchronized void addToys(List<Toy> toys) {
         this.toys.addAll(toys);
     }
 
     @Override
-    public List<Toy> getAllToys() {
+    public synchronized List<Toy> getAllToys() {
         return new ArrayList<>(toys);
     }
 
@@ -43,7 +42,7 @@ public class ArrayListToyRepository implements ToyRepository {
      * @return toys list
      */
     @Override
-    public List<Toy> getToysForSummaryCostWithSizesAndReturnTrifle(BigDecimal cost, ToySize... toySizes) {
+    public synchronized List<Toy> getToysForSummaryCostWithSizesAndReturnTrifle(BigDecimal cost, ToySize... toySizes) {
 
         List<Toy> result = new ArrayList<>();
         Set<ToySize> sizes = EnumSet.copyOf(Arrays.asList(toySizes));

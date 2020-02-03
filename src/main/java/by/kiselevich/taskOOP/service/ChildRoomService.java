@@ -11,6 +11,7 @@ import by.kiselevich.taskOOP.repository.ToyRepository;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ChildRoomService {
@@ -18,10 +19,12 @@ public class ChildRoomService {
     private static final Logger logger = LogManager.getLogger(ChildRoomService.class);
 
     private final ToyRepository toyRepository;
+    private final List<Thread> threads;
 
     private ChildRoomService() {
         toyRepository = ToyRepositoryFactory.getInstance().getToyRepository();
         initToys();
+        threads = new ArrayList<>();
     }
 
     private static class ChildRoomServiceHolder {
@@ -49,10 +52,22 @@ public class ChildRoomService {
         if (child.receiveToys(toyRepository)) {
             logger.info("Child " + child + " start");
             try {
-                List<Toy> returnedToys = child.call();
-                toyRepository.addToys(returnedToys);
-                logger.info("Child " + child + " served");
+                Thread thread = new Thread(child);
+                threads.add(thread);
+                thread.start();
             } catch (Exception e) {
+                logger.error(e);
+            }
+        } else {
+            logger.info("Child " + child + " cant receive toys, skip");
+        }
+    }
+
+    public void waitForChildren() {
+        for(Thread thread : threads) {
+            try {
+                thread.join();
+            } catch (InterruptedException e) {
                 logger.error(e);
             }
         }

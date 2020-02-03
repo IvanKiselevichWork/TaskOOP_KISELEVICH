@@ -31,6 +31,8 @@ public class ChildRoomController {
             logger.info("controller work");
             childRoomService.serveChild(childRepository.getChild());
         }
+        logger.info("Wait for children");
+        childRoomService.waitForChildren();
         logger.info("End controller");
     }
 }

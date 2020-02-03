@@ -1,13 +1,18 @@
 package by.kiselevich.taskOOP.entity.child;
 
 import by.kiselevich.taskOOP.entity.toy.Toy;
+import by.kiselevich.taskOOP.factory.ToyRepositoryFactory;
 import by.kiselevich.taskOOP.repository.ToyRepository;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.math.BigDecimal;
 import java.util.List;
-import java.util.concurrent.Callable;
 
-public abstract class Child implements Callable<List<Toy>> {
+public abstract class Child implements Runnable {
+
+    private static final Logger logger = LogManager.getLogger(Child.class);
+
     private String firstName;
     private String lastName;
 
@@ -71,11 +76,15 @@ public abstract class Child implements Callable<List<Toy>> {
     public abstract boolean receiveToys(ToyRepository toyRepository);
 
     @Override
-    public List<Toy> call() throws Exception {
-        Thread.sleep(hours * 1000);
-        List<Toy> returnedToys = toys;
-        toys = null;
-        return returnedToys;
+    public void run() {
+        try {
+            Thread.sleep(hours * 1000);
+            ToyRepositoryFactory.getInstance().getToyRepository().addToys(toys);
+            toys = null;
+            logger.info("Child " + this + " served");
+        } catch (InterruptedException e) {
+            logger.error(e);
+        }
     }
 
     protected void removeMoneyForToys() {

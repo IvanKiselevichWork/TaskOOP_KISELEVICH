@@ -11,8 +11,8 @@ public class ChildRoomController {
 
     private static final Logger logger = LogManager.getLogger(ChildRoomController.class);
 
-    private ChildRepository childRepository;
-    private ChildRoomService childRoomService;
+    private final ChildRepository childRepository;
+    private final ChildRoomService childRoomService;
 
     public ChildRoomController() {
         childRepository = ChildRepositoryFactory.getInstance().getChildRepository();

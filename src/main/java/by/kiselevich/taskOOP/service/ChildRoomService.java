@@ -1,12 +1,8 @@
 package by.kiselevich.taskOOP.service;
 
 import by.kiselevich.taskOOP.entity.child.Child;
-import by.kiselevich.taskOOP.entity.toy.Toy;
-import by.kiselevich.taskOOP.factory.ChildRepositoryFactory;
 import by.kiselevich.taskOOP.factory.ToyRepositoryFactory;
-import by.kiselevich.taskOOP.reader.ChildReader;
 import by.kiselevich.taskOOP.reader.ToyReader;
-import by.kiselevich.taskOOP.repository.ChildRepository;
 import by.kiselevich.taskOOP.repository.ToyRepository;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -31,23 +27,14 @@ public class ChildRoomService {
         public static final ChildRoomService instance = new ChildRoomService();
     }
 
-    /**
-     *
-     * @return
-     */
     public static ChildRoomService getInstance() {
         return ChildRoomServiceHolder.instance;
     }
-
 
     private void initToys() {
         toyRepository.addToys(ToyReader.getInstance().readToys());
     }
 
-    /**
-     *
-     * @param child
-     */
     public void serveChild(Child child) {
         if (child.receiveToys(toyRepository)) {
             logger.info("Child " + child + " start");

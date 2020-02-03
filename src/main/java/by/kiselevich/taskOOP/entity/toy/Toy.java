@@ -13,10 +13,6 @@ public class Toy {
         this.cost = cost;
     }
 
-    public ToyType getToyType() {
-        return toyType;
-    }
-
     public ToySize getSize() {
         return size;
     }

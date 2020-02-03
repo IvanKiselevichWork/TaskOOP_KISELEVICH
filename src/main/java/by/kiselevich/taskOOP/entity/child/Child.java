@@ -96,13 +96,27 @@ public abstract class Child implements Runnable {
         budget = budget.subtract(sumToys);
     }
 
-    public String getFirstName() {
-        return firstName;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Child child = (Child) o;
+
+        if (!firstName.equals(child.firstName)) return false;
+        return lastName.equals(child.lastName);
     }
 
-    public String getLastName() {
-        return lastName;
+    @Override
+    public int hashCode() {
+        int result = firstName.hashCode();
+        result = 31 * result + lastName.hashCode();
+        return result;
     }
 
-
+    @Override
+    public String toString() {
+        return firstName + " " + lastName;
+    }
 }

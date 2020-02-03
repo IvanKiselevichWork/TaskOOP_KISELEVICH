@@ -7,9 +7,7 @@ import java.math.BigDecimal;
 import java.util.List;
 
 public interface ToyRepository {
-    void addToy(Toy toy);
-    boolean removeToy(Toy toy);
+
     void addToys(List<Toy> toys);
-    List<Toy> getAllToys();
-    List<Toy> getToysForSummaryCostWithSizesAndReturnTrifle(BigDecimal cost, ToySize ... toySizes);
+    List<Toy> getToysForSummaryCostWithSizes(BigDecimal cost, ToySize ... toySizes);
 }

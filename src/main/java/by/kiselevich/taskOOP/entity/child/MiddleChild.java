@@ -10,7 +10,7 @@ public class MiddleChild extends Child {
     @Override
     public boolean receiveToys(ToyRepository toyRepository) {
         BigDecimal budgetPerHour = budget.divide(BigDecimal.valueOf(hours), BigDecimal.ROUND_DOWN);
-        toys = toyRepository.getToysForSummaryCostWithSizesAndReturnTrifle(budgetPerHour, ToySize.BIG, ToySize.MEDIUM);
+        toys = toyRepository.getToysForSummaryCostWithSizes(budgetPerHour, ToySize.BIG, ToySize.MEDIUM);
         if (toys.isEmpty()) {
             return false;
         } else {

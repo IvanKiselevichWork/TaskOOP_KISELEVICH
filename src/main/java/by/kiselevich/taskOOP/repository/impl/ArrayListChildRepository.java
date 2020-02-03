@@ -11,16 +11,6 @@ public class ArrayListChildRepository implements ChildRepository {
     private final List<Child> children = new ArrayList<>();
 
     @Override
-    public void addChild(Child child) {
-        children.add(child);
-    }
-
-    @Override
-    public boolean removeChild(Child child) {
-         return children.remove(child);
-    }
-
-    @Override
     public void addChildren(List<Child> children) {
         this.children.addAll(children);
     }

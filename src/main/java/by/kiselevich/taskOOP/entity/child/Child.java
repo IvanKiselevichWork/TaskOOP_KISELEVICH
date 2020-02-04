@@ -1,33 +1,31 @@
 package by.kiselevich.taskOOP.entity.child;
 
 import by.kiselevich.taskOOP.entity.toy.Toy;
-import by.kiselevich.taskOOP.factory.ToyRepositoryFactory;
-import by.kiselevich.taskOOP.repository.ToyRepository;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.math.BigDecimal;
 import java.util.List;
 
-public abstract class Child {
+public class Child {
 
     private static final Logger logger = LogManager.getLogger(Child.class);
 
     private String firstName;
     private String lastName;
+    private int age;
+    private int hours;
 
-    protected BigDecimal budget;
-    protected int hours;
-
-    protected List<Toy> toys;
+    private BigDecimal budget;
+    private List<Toy> toys;
 
     public static class Builder {
 
         private String firstName;
         private String lastName;
-        private Integer age;
+        private int age;
         protected BigDecimal budget;
-        protected Integer hours;
+        protected int hours;
 
         public Builder firstName(String firstName) {
             this.firstName = firstName;
@@ -39,7 +37,7 @@ public abstract class Child {
             return this;
         }
 
-        public Builder age(Integer age) {
+        public Builder age(int age) {
             this.age = age;
             return this;
         }
@@ -49,23 +47,16 @@ public abstract class Child {
             return this;
         }
 
-        public Builder hours(Integer hours) {
+        public Builder hours(int hours) {
             this.hours = hours;
             return this;
         }
 
         public Child build() {
-            Child child;
-            if (age >= 2 && age < 7) {
-                child = new YoungerChild() {
-                };
-            } else if (age >= 7 && age < 12) {
-                child = new MiddleChild();
-            } else {
-                child = new OlderChild();
-            }
+            Child child = new Child();
             child.firstName = firstName;
             child.lastName = lastName;
+            child.age = age;
             child.budget = budget;
             child.hours = hours;
             return child;
@@ -73,17 +64,53 @@ public abstract class Child {
 
     }
 
-    public abstract boolean receiveToys(ToyRepository toyRepository);
-
-    protected void removeMoneyForToys() {
-        BigDecimal sumToys = BigDecimal.valueOf(0);
-        for (Toy toy : toys) {
-            sumToys = sumToys.add(toy.getCost());
-        }
-        sumToys = sumToys.multiply(BigDecimal.valueOf(hours));
-        budget = budget.subtract(sumToys);
+    public String getFirstName() {
+        return firstName;
     }
 
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    public int getHours() {
+        return hours;
+    }
+
+    public void setHours(int hours) {
+        this.hours = hours;
+    }
+
+    public BigDecimal getBudget() {
+        return budget;
+    }
+
+    public void setBudget(BigDecimal budget) {
+        this.budget = budget;
+    }
+
+    public List<Toy> getToys() {
+        return toys;
+    }
+
+    public void setToys(List<Toy> toys) {
+        this.toys = toys;
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -92,19 +119,29 @@ public abstract class Child {
 
         Child child = (Child) o;
 
-        if (!firstName.equals(child.firstName)) return false;
-        return lastName.equals(child.lastName);
+        if (age != child.age) return false;
+        if (hours != child.hours) return false;
+        if (firstName != null ? !firstName.equals(child.firstName) : child.firstName != null) return false;
+        return lastName != null ? lastName.equals(child.lastName) : child.lastName == null;
     }
 
     @Override
     public int hashCode() {
-        int result = firstName.hashCode();
-        result = 31 * result + lastName.hashCode();
+        int result = firstName != null ? firstName.hashCode() : 0;
+        result = 31 * result + (lastName != null ? lastName.hashCode() : 0);
+        result = 31 * result + age;
+        result = 31 * result + hours;
         return result;
     }
 
     @Override
     public String toString() {
         return firstName + " " + lastName;
+    }
+
+    public void playWithToys() {
+        for(Toy toy : toys) {
+            toy.play();
+        }
     }
 }

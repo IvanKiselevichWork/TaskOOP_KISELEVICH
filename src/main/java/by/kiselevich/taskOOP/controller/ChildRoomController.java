@@ -52,6 +52,7 @@ public class ChildRoomController {
         List<Child> children = childRepository.getAllChildren();
         children.sort(childComparator);
         for (Child child : children) {
+            LOGGER.info("child " + child + "start serving, age = " + child.getAge());
             childRoomService.serveChild(child);
         }
     }

@@ -142,6 +142,7 @@ public class Child {
     public void playWithToys() {
         for(Toy toy : toys) {
             toy.play();
+            logger.info("Child: " + this + " play with toy: " + toy);
         }
     }
 }

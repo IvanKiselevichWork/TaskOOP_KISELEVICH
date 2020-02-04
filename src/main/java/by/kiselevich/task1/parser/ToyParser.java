@@ -11,7 +11,6 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.List;
 
 import static by.kiselevich.task1.exception.ToyExceptionMessages.*;
@@ -65,9 +64,9 @@ public class ToyParser {
             throw new ToyParseException(INVALID_TOY_COUNT.getMessage());
         }
         int count = stringParser.parseStringToInt(toyArray[3]);
-        if (toyValidator.checkToyType(toyType)
-                && toyValidator.checkToySize(toySize)
-                && toyValidator.checkCost(cost)
+        if (toyValidator.checkToyTypeForNull(toyType)
+                && toyValidator.checkToySizeForNull(toySize)
+                && toyValidator.checkCostForNullAndPositivity(cost)
                 && count > 0) {
             LOGGER.info("Toy parsed");
             return toyFactory.createToys(toyType, toySize, cost, count);

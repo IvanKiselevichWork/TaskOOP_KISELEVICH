@@ -15,14 +15,4 @@ public class StringParser {
         return scanner.nextInt();
     }
 
-    public <E extends Enum<E>> Enum<E> parseStringToEnum(Class<E> enumClass, String string) {
-
-        for (Enum<E> enumVal: enumClass.getEnumConstants()) {
-            if (enumVal.toString().toUpperCase().equals(string.toUpperCase())) {
-                return enumVal;
-            }
-        }
-
-        return null;
-    }
 }

@@ -7,6 +7,8 @@ import by.kiselevich.taskOOP.exception.ToyParseException;
 import by.kiselevich.taskOOP.factory.ToyFactory;
 import by.kiselevich.taskOOP.validator.StringValidator;
 import by.kiselevich.taskOOP.validator.ToyValidator;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -14,6 +16,7 @@ import java.util.List;
 
 public class ToyParser {
 
+    private static final Logger LOGGER = LogManager.getLogger(ToyParser.class);
     private static final String DELIMITER = ";";
     private final int DATA_ARRAY_SIZE = 4;
     private final int TYPE_INDEX = 0;
@@ -65,6 +68,7 @@ public class ToyParser {
                 && toyValidator.checkToySize(toySize)
                 && toyValidator.checkCost(cost)
                 && count > 0) {
+            LOGGER.info("Child parsed");
             return toyFactory.createToys(toyType, toySize, cost, count);
         } else {
             throw new ToyParseException();

@@ -65,6 +65,7 @@ public class ChildParser {
                 && childValidator.checkBudget(budget)
                 && childValidator.checkHours(hours)) {
 
+            LOGGER.info("Child parsed");
             return new Child.Builder()
                     .firstName(firstName)
                     .lastName(lastName)

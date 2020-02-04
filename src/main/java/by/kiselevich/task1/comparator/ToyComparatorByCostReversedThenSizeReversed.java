@@ -8,6 +8,6 @@ public class ToyComparatorByCostReversedThenSizeReversed implements Comparator<T
     @Override
     public int compare(Toy o1, Toy o2) {
         return Comparator.comparing(Toy::getCost).reversed()
-                .thenComparing(Toy::getSize).reversed().compare(o1, o2);
+                .thenComparing(Comparator.comparing(Toy::getSize).reversed()).compare(o1, o2);
     }
 }

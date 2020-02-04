@@ -14,7 +14,7 @@ import java.util.List;
 
 public class ChildRoomService {
 
-    private final static String CHILDREN_FILEPATH = "children.txt";
+    private final static String TOYS_FILEPATH = "toys.txt";
     private static final Logger LOGGER = LogManager.getLogger(ChildRoomService.class);
 
     private final ToyRepository toyRepository;
@@ -33,7 +33,7 @@ public class ChildRoomService {
     }
 
     private void initToys() {
-        toyRepository.addToys(new ToyFileReader(CHILDREN_FILEPATH).readToys());
+        toyRepository.addToys(new ToyFileReader(TOYS_FILEPATH).readToys());
         LOGGER.info("Toys initiated");
     }
 

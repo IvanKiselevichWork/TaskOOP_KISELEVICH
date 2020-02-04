@@ -1,7 +1,7 @@
 package by.kiselevich.taskOOP.controller;
 
 import by.kiselevich.taskOOP.factory.ChildRepositoryFactory;
-import by.kiselevich.taskOOP.reader.ChildReader;
+import by.kiselevich.taskOOP.reader.ChildFileReader;
 import by.kiselevich.taskOOP.repository.ChildRepository;
 import by.kiselevich.taskOOP.service.ChildRoomService;
 import org.apache.logging.log4j.LogManager;
@@ -21,7 +21,7 @@ public class ChildRoomController {
     }
 
     private void initChildren() {
-        childRepository.addChildren(ChildReader.getInstance().readChildren());
+        childRepository.addChildren(ChildFileReader.getInstance().readChildren());
     }
 
 

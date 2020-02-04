@@ -18,12 +18,10 @@ public class ToyFileReader {
 
     private static final Logger LOGGER = LogManager.getLogger(ToyFileReader.class);
 
-    private ToyFactory toyFactory;
     private String toyFilepath;
     private ToyParser toyParser;
 
     public ToyFileReader(String toyFilepath) {
-        toyFactory = ToyFactory.getInstance();
         this.toyFilepath = toyFilepath;
         toyParser = new ToyParser();
     }

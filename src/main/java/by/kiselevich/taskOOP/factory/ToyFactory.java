@@ -1,8 +1,6 @@
 package by.kiselevich.taskOOP.factory;
 
-import by.kiselevich.taskOOP.entity.toy.Toy;
-import by.kiselevich.taskOOP.entity.toy.ToySize;
-import by.kiselevich.taskOOP.entity.toy.ToyType;
+import by.kiselevich.taskOOP.entity.toy.*;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -23,9 +21,28 @@ public class ToyFactory {
         return ToyFactoryHolder.instance;
     }
     
-    public List<Toy> getToys(ToyType toyType, ToySize toySize, BigDecimal cost, int count) {
+    public List<Toy> createToys(ToyType toyType, ToySize toySize, BigDecimal cost, int count) {
         List<Toy> toys = new ArrayList<>(count);
-        IntStream.range(0, count).forEach(i -> toys.add(new Toy(toyType, toySize, cost)));
+        IntStream.range(0, count).forEach(i -> toys.add(createConcreteToyFromType(toyType, toySize, cost)));
         return toys;
+    }
+
+    private Toy createConcreteToyFromType(ToyType toyType, ToySize toySize, BigDecimal cost) {
+        Toy toy = null;
+        switch (toyType) {
+            case BALL:
+                toy = new Ball(toySize, cost);
+                break;
+            case CAR:
+                toy = new Car(toySize, cost);
+                break;
+            case CUBE:
+                toy = new Cube(toySize, cost);
+                break;
+            case DOLL:
+                toy = new Doll(toySize, cost);
+                break;
+        }
+        return toy;
     }
 }

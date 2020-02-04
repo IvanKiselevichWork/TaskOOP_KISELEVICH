@@ -65,7 +65,7 @@ public class ToyParser {
                 && toyValidator.checkToySize(toySize)
                 && toyValidator.checkCost(cost)
                 && count > 0) {
-            return toyFactory.getToys(toyType, toySize, cost, count);
+            return toyFactory.createToys(toyType, toySize, cost, count);
         } else {
             throw new ToyParseException();
         }

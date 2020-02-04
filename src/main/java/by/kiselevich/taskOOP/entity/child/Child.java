@@ -132,7 +132,7 @@ public class Child {
 
     public void playWithToys(List<Toy> toys) {
         for (int i = 0; i < hours; i++) {
-            LOGGER.info("Child: " + this + " play " + hours + " hour");
+            LOGGER.info("Child: " + this + " play " + (i + 1) + " hour");
             for (Toy toy : toys) {
                 toy.play();
                 LOGGER.info("Child: " + this + " play with toy: " + toy);

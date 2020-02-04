@@ -1,5 +1,6 @@
 package by.kiselevich.taskOOP.reader;
 
+import by.kiselevich.taskOOP.exception.ChildParseException;
 import by.kiselevich.taskOOP.parser.ChildParser;
 import by.kiselevich.taskOOP.entity.child.Child;
 import org.apache.logging.log4j.LogManager;
@@ -29,7 +30,11 @@ public class ChildFileReader {
         try {
             List<String> childrenStrList = Files.readAllLines(Paths.get(childrenFilepath));
             for (String childStr : childrenStrList) {
-                children.add(childParser.parseChildFromString(childStr));
+                try {
+                    children.add(childParser.parseChildFromString(childStr));
+                } catch (ChildParseException e) {
+                    logger.warn(e);
+                }
             }
         } catch (IOException e) {
             logger.error(e);

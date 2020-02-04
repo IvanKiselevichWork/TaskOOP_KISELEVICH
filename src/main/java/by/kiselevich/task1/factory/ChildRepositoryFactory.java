@@ -9,11 +9,11 @@ public class ChildRepositoryFactory {
     }
 
     private static class ChildRepositoryFactoryHolder {
-        private static final ChildRepositoryFactory instance = new ChildRepositoryFactory();
+        private static final ChildRepositoryFactory INSTANCE = new ChildRepositoryFactory();
     }
 
     public static ChildRepositoryFactory getInstance() {
-        return ChildRepositoryFactoryHolder.instance;
+        return ChildRepositoryFactoryHolder.INSTANCE;
     }
 
     public ChildRepository getChildRepository() {

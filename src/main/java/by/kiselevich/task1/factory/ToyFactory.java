@@ -14,11 +14,11 @@ public class ToyFactory {
     }
 
     private static class ToyFactoryHolder {
-        private static final ToyFactory instance = new ToyFactory();
+        private static final ToyFactory INSTANCE = new ToyFactory();
     }
 
     public static ToyFactory getInstance() {
-        return ToyFactoryHolder.instance;
+        return ToyFactoryHolder.INSTANCE;
     }
     
     public List<Toy> createToys(ToyType toyType, ToySize toySize, BigDecimal cost, int count) {

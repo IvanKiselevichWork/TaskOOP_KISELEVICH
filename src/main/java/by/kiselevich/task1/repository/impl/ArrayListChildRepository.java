@@ -8,7 +8,7 @@ import java.util.List;
 
 public class ArrayListChildRepository implements ChildRepository {
 
-    private final List<Child> children = new ArrayList<>();
+    private List<Child> children = new ArrayList<>();
 
     @Override
     public void addChildren(List<Child> children) {

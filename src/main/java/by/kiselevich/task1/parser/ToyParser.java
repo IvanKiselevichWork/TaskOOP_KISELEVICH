@@ -20,11 +20,11 @@ public class ToyParser {
 
     private static final Logger LOGGER = LogManager.getLogger(ToyParser.class);
     private static final String DELIMITER = ";";
-    private final int DATA_ARRAY_SIZE = 4;
-    private final int TYPE_INDEX = 0;
-    private final int SIZE_INDEX = 1;
-    private final int COST_INDEX = 2;
-    private final int COUNT_INDEX = 3;
+    private static final int DATA_ARRAY_SIZE = 4;
+    private static final int TYPE_INDEX = 0;
+    private static final int SIZE_INDEX = 1;
+    private static final int COST_INDEX = 2;
+    private static final int COUNT_INDEX = 3;
 
     private ToyValidator toyValidator;
     private StringParser stringParser;

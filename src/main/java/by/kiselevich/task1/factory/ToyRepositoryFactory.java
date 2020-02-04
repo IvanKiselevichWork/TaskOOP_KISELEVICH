@@ -9,11 +9,11 @@ public class ToyRepositoryFactory {
     }
 
     private static class ToyRepositoryFactoryHolder {
-        private static final ToyRepositoryFactory instance = new ToyRepositoryFactory();
+        private static final ToyRepositoryFactory INSTANCE = new ToyRepositoryFactory();
     }
 
     public static ToyRepositoryFactory getInstance() {
-        return ToyRepositoryFactory.ToyRepositoryFactoryHolder.instance;
+        return ToyRepositoryFactory.ToyRepositoryFactoryHolder.INSTANCE;
     }
 
     public ToyRepository getToyRepository() {

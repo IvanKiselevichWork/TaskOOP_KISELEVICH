@@ -18,10 +18,10 @@ import java.util.Optional;
 
 public class ChildRoomService {
 
-    private final static String TOYS_FILEPATH = "toys.txt";
+    private static final String TOYS_FILEPATH = "toys.txt";
     private static final Logger LOGGER = LogManager.getLogger(ChildRoomService.class);
 
-    private final ToyRepository toyRepository;
+    private ToyRepository toyRepository;
 
     private ChildRoomService() {
         toyRepository = ToyRepositoryFactory.getInstance().getToyRepository();
@@ -29,11 +29,11 @@ public class ChildRoomService {
     }
 
     private static class ChildRoomServiceHolder {
-        public static final ChildRoomService instance = new ChildRoomService();
+        public static final ChildRoomService INSTANCE = new ChildRoomService();
     }
 
     public static ChildRoomService getInstance() {
-        return ChildRoomServiceHolder.instance;
+        return ChildRoomServiceHolder.INSTANCE;
     }
 
     private void initToys() {

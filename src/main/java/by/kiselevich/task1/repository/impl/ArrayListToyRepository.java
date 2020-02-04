@@ -10,7 +10,7 @@ import java.util.*;
 
 public class ArrayListToyRepository implements ToyRepository {
 
-    final List<Toy> toys = new ArrayList<>();
+    private List<Toy> toys = new ArrayList<>();
 
     @Override
     public void addToys(List<Toy> toys) {

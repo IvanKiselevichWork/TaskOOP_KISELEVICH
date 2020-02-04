@@ -34,7 +34,7 @@ public class ToyParser {
     }
 
 
-    private List<Toy> parseToysFromString(String string) throws ToyParseException {
+    public List<Toy> parseToysFromString(String string) throws ToyParseException {
         List<Toy> toys = new ArrayList<>();
 
         String[] toyArray = string.split(DELIMITER);

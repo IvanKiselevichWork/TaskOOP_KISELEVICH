@@ -59,11 +59,11 @@ public class ChildParser {
         }
         hours = stringParser.parseStringToInt(childArray[HOURS_INDEX]);
 
-        if (childValidator.checkFirstName(firstName)
-                && childValidator.checkLastName(lastName)
-                && childValidator.checkAge(age)
-                && childValidator.checkBudget(budget)
-                && childValidator.checkHours(hours)) {
+        if (childValidator.isName(firstName)
+                && childValidator.isName(lastName)
+                && childValidator.isAgeChildish(age)
+                && childValidator.isBudgetNotNullAndPositive(budget)
+                && childValidator.isHoursPositive(hours)) {
 
             LOGGER.info("Child parsed");
             return new Child.Builder()

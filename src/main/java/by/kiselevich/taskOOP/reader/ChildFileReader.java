@@ -14,7 +14,7 @@ import java.util.List;
 
 public class ChildFileReader {
 
-    private static final Logger logger = LogManager.getLogger(ChildFileReader.class);
+    private static final Logger LOGGER = LogManager.getLogger(ChildFileReader.class);
 
     private ChildParser childParser;
     private String childrenFilepath;
@@ -37,11 +37,11 @@ public class ChildFileReader {
                 try {
                     children.add(childParser.parseChildFromString(childStr));
                 } catch (ChildParseException e) {
-                    logger.warn(e);
+                    LOGGER.warn(e);
                 }
             }
         } catch (IOException e) {
-            logger.error(e);
+            LOGGER.error(e);
         }
         return children;
     }

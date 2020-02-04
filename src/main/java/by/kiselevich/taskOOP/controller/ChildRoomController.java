@@ -9,7 +9,7 @@ import org.apache.logging.log4j.Logger;
 
 public class ChildRoomController {
 
-    private static final Logger logger = LogManager.getLogger(ChildRoomController.class);
+    private static final Logger LOGGER = LogManager.getLogger(ChildRoomController.class);
 
     private final ChildRepository childRepository;
     private final ChildRoomService childRoomService;

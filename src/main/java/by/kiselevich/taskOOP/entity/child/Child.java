@@ -9,7 +9,7 @@ import java.util.List;
 
 public class Child {
 
-    private static final Logger logger = LogManager.getLogger(Child.class);
+    private static final Logger LOGGER = LogManager.getLogger(Child.class);
 
     private String firstName;
     private String lastName;
@@ -142,7 +142,7 @@ public class Child {
     public void playWithToys() {
         for(Toy toy : toys) {
             toy.play();
-            logger.info("Child: " + this + " play with toy: " + toy);
+            LOGGER.info("Child: " + this + " play with toy: " + toy);
         }
     }
 }

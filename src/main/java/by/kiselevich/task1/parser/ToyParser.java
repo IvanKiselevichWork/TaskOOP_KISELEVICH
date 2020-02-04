@@ -40,7 +40,6 @@ public class ToyParser {
 
 
     public List<Toy> parseToysFromString(String string) throws ToyParseException {
-        List<Toy> toys = new ArrayList<>();
 
         String[] toyArray = string.split(DELIMITER);
         if (toyArray.length != DATA_ARRAY_SIZE) {

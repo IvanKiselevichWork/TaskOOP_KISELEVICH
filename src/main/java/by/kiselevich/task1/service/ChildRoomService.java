@@ -21,6 +21,13 @@ public class ChildRoomService {
     private static final String TOYS_FILEPATH = "toys.txt";
     private static final Logger LOGGER = LogManager.getLogger(ChildRoomService.class);
 
+    private static final int YOUNG_CHILD_MIN_AGE = 2;
+    private static final int YOUNG_CHILD_MAX_AGE = 6;
+    private static final int MIDDLE_CHILD_MIN_AGE = 7;
+    private static final int MIDDLE_CHILD_MAX_AGE = 11;
+    private static final int OLD_CHILD_MIN_AGE = 12;
+    private static final int OLD_CHILD_MAX_AGE = 15;
+
     private ToyRepository toyRepository;
 
     private ChildRoomService() {
@@ -68,12 +75,14 @@ public class ChildRoomService {
     }
 
     private ToySize[] getToysSizesByChildAge(int age) {
-        if (age >= 2 && age < 7) {
+        if (age >= YOUNG_CHILD_MIN_AGE && age <= YOUNG_CHILD_MAX_AGE) {
             return new ToySize[]{ToySize.BIG};
-        } else if (age >= 7 && age < 12) {
+        } else if (age >= MIDDLE_CHILD_MIN_AGE && age <= MIDDLE_CHILD_MAX_AGE) {
             return new ToySize[]{ToySize.BIG, ToySize.MEDIUM};
-        } else {
+        } else if (age >= OLD_CHILD_MIN_AGE && age <= OLD_CHILD_MAX_AGE) {
             return new ToySize[]{ToySize.BIG, ToySize.MEDIUM, ToySize.SMALL};
+        } else {
+            return new ToySize[]{};
         }
     }
 }

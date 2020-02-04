@@ -4,6 +4,9 @@ import java.math.BigDecimal;
 
 public class ChildValidator {
 
+    private static final int YOUNG_CHILD_MIN_AGE = 2;
+    private static final int OLD_CHILD_MAX_AGE = 15;
+
     public boolean checkFirstName(String firstName) {
         return firstName != null;
     }
@@ -13,7 +16,7 @@ public class ChildValidator {
     }
 
     public boolean checkAge(int age) {
-        return age >= 2 && age < 15;
+        return age >= YOUNG_CHILD_MIN_AGE && age <= OLD_CHILD_MAX_AGE;
     }
 
     public boolean checkBudget(BigDecimal budget) {

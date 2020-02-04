@@ -1,6 +1,6 @@
 package by.kiselevich.task1.repository.impl;
 
-import by.kiselevich.task1.comparator.ToyComparator;
+import by.kiselevich.task1.comparator.ToyComparatorByCostReversedThenSizeReversed;
 import by.kiselevich.task1.entity.toy.Toy;
 import by.kiselevich.task1.entity.toy.ToySize;
 import by.kiselevich.task1.repository.ToyRepository;
@@ -15,7 +15,7 @@ public class ArrayListToyRepository implements ToyRepository {
     @Override
     public void addToys(List<Toy> toys) {
         this.toys.addAll(toys);
-        toys.sort(new ToyComparator());
+        toys.sort(new ToyComparatorByCostReversedThenSizeReversed());
     }
 
     /**

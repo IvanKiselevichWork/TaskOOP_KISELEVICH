@@ -56,7 +56,8 @@ public class ChildRoomService {
 
     public void serveChild(Child child) {
         BigDecimal budgetPerHour = child.getBudget().divide(BigDecimal.valueOf(child.getHours()), BigDecimal.ROUND_DOWN);
-        List<Toy> toys = toyRepository.getToysForSummaryCostWithSizes(budgetPerHour, ToySize.BIG, ToySize.MEDIUM);
+        ToySize[] toysSizes = getToysSizesByChildAge(child.getAge());
+        List<Toy> toys = toyRepository.getToysForSummaryCostWithSizes(budgetPerHour, toysSizes);
         if (!toys.isEmpty()) {
             BigDecimal totalCostOfToys = BigDecimal.valueOf(0);
             for (Toy toy : toys) {
@@ -65,6 +66,16 @@ public class ChildRoomService {
             totalCostOfToys = totalCostOfToys.multiply(BigDecimal.valueOf(child.getHours()));
             child.setBudget(child.getBudget().subtract(totalCostOfToys));
             child.playWithToys(toys);
+        }
+    }
+
+    private ToySize[] getToysSizesByChildAge(int age) {
+        if (age >= 2 && age < 7) {
+            return new ToySize[]{ToySize.BIG};
+        } else if (age >= 7 && age < 12) {
+            return new ToySize[]{ToySize.BIG, ToySize.MEDIUM};
+        } else {
+            return new ToySize[]{ToySize.BIG, ToySize.MEDIUM, ToySize.SMALL};
         }
     }
 }

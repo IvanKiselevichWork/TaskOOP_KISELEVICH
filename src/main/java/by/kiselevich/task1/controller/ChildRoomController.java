@@ -1,6 +1,6 @@
 package by.kiselevich.task1.controller;
 
-import by.kiselevich.task1.comparator.ChildComparator;
+import by.kiselevich.task1.comparator.ChildComparatorByAgeThenLastNameThenFirstName;
 import by.kiselevich.task1.entity.child.Child;
 import by.kiselevich.task1.factory.ChildRepositoryFactory;
 import by.kiselevich.task1.reader.ChildFileReader;
@@ -12,6 +12,7 @@ import org.apache.logging.log4j.Logger;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.file.Paths;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 
@@ -22,13 +23,13 @@ public class ChildRoomController {
 
     private ChildRepository childRepository;
     private ChildRoomService childRoomService;
-    private ChildComparator childComparator;
+    private Comparator<Child> childComparator;
 
     public ChildRoomController() {
         childRepository = ChildRepositoryFactory.getInstance().getChildRepository();
         childRoomService = ChildRoomService.getInstance();
         initChildren();
-        childComparator = new ChildComparator();
+        childComparator = new ChildComparatorByAgeThenLastNameThenFirstName();
     }
 
     private void initChildren() {

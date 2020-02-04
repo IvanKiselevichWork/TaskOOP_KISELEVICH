@@ -4,7 +4,7 @@ import by.kiselevich.task1.entity.child.Child;
 
 import java.util.Comparator;
 
-public class ChildComparator implements Comparator<Child> {
+public class ChildComparatorByAgeThenLastNameThenFirstName implements Comparator<Child> {
     @Override
     public int compare(Child o1, Child o2) {
         Comparator<Child> comparator = Comparator

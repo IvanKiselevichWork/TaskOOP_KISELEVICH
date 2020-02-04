@@ -1,5 +1,6 @@
 package by.kiselevich.taskOOP.repository.impl;
 
+import by.kiselevich.taskOOP.comparator.ToyComparator;
 import by.kiselevich.taskOOP.entity.toy.Toy;
 import by.kiselevich.taskOOP.entity.toy.ToySize;
 import by.kiselevich.taskOOP.repository.ToyRepository;
@@ -12,8 +13,9 @@ public class ArrayListToyRepository implements ToyRepository {
     final List<Toy> toys = new ArrayList<>();
 
     @Override
-    public synchronized void addToys(List<Toy> toys) {
+    public void addToys(List<Toy> toys) {
         this.toys.addAll(toys);
+        toys.sort(new ToyComparator());
     }
 
     /**
@@ -23,7 +25,7 @@ public class ArrayListToyRepository implements ToyRepository {
      * @return toys list
      */
     @Override
-    public synchronized List<Toy> getToysForSummaryCostWithSizes(BigDecimal cost, ToySize... toySizes) {
+    public List<Toy> getToysForSummaryCostWithSizes(BigDecimal cost, ToySize... toySizes) {
 
         List<Toy> result = new ArrayList<>();
         Set<ToySize> sizes = EnumSet.copyOf(Arrays.asList(toySizes));

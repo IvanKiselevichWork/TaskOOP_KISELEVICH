@@ -14,6 +14,8 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
+import static by.kiselevich.taskOOP.exception.ToyExceptionMessages.*;
+
 public class ToyParser {
 
     private static final Logger LOGGER = LogManager.getLogger(ToyParser.class);
@@ -42,36 +44,36 @@ public class ToyParser {
 
         String[] toyArray = string.split(DELIMITER);
         if (toyArray.length != DATA_ARRAY_SIZE) {
-            throw new ToyParseException();
+            throw new ToyParseException(INVALID_DATA_ARRAY_LENGTH.getMessage());
         }
 
         if (!stringValidator.isStringParsableToEnum(ToyType.class, toyArray[TYPE_INDEX])) {
-            throw new ToyParseException();
+            throw new ToyParseException(INVALID_TOY_TYPE.getMessage());
         }
         ToyType toyType = ToyType.valueOf(toyArray[TYPE_INDEX].toUpperCase());
 
         if (!stringValidator.isStringParsableToEnum(ToySize.class, toyArray[SIZE_INDEX])) {
-            throw new ToyParseException();
+            throw new ToyParseException(INVALID_TOY_SIZE.getMessage());
         }
         ToySize toySize = ToySize.valueOf(toyArray[SIZE_INDEX]);
 
-        if(stringValidator.isStringParsableToBigDecimal(toyArray[COST_INDEX])) {
-            throw new ToyParseException();
+        if(!stringValidator.isStringParsableToBigDecimal(toyArray[COST_INDEX])) {
+            throw new ToyParseException(INVALID_TOY_COST.getMessage());
         }
         BigDecimal cost = stringParser.parseStringToBigDecimal(toyArray[COST_INDEX]);
 
-        if(stringValidator.isStringParsableToInt(toyArray[COUNT_INDEX])) {
-            throw new ToyParseException();
+        if(!stringValidator.isStringParsableToInt(toyArray[COUNT_INDEX])) {
+            throw new ToyParseException(INVALID_TOY_COUNT.getMessage());
         }
         int count = stringParser.parseStringToInt(toyArray[3]);
         if (toyValidator.checkToyType(toyType)
                 && toyValidator.checkToySize(toySize)
                 && toyValidator.checkCost(cost)
                 && count > 0) {
-            LOGGER.info("Child parsed");
+            LOGGER.info("Toy parsed");
             return toyFactory.createToys(toyType, toySize, cost, count);
         } else {
-            throw new ToyParseException();
+            throw new ToyParseException(TOY_NOT_PASS_VALIDATION.getMessage());
         }
     }
 }

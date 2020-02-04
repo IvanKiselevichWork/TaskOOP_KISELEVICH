@@ -1,14 +1,22 @@
 package by.kiselevich.taskOOP.entity.toy;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import java.math.BigDecimal;
 
-public class Toy {
-    private final ToyType toyType;
-    private final ToySize size;
-    private final BigDecimal cost;
+public abstract class Toy {
 
-    public Toy(ToyType toyType, ToySize size, BigDecimal cost) {
-        this.toyType = toyType;
+    protected final Logger LOGGER = LogManager.getLogger(Toy.class);
+
+    private ToySize size;
+    private BigDecimal cost;
+
+    public Toy() {
+
+    }
+
+    public Toy(ToySize size, BigDecimal cost) {
         this.size = size;
         this.cost = cost;
     }
@@ -21,6 +29,16 @@ public class Toy {
         return cost;
     }
 
+    public void setSize(ToySize size) {
+        this.size = size;
+    }
+
+    public void setCost(BigDecimal cost) {
+        this.cost = cost;
+    }
+
+    public abstract void play();
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -28,24 +46,21 @@ public class Toy {
 
         Toy toy = (Toy) o;
 
-        if (toyType != toy.toyType) return false;
         if (size != toy.size) return false;
-        return cost.equals(toy.cost);
+        return cost != null ? cost.equals(toy.cost) : toy.cost == null;
     }
 
     @Override
     public int hashCode() {
-        int result = toyType.hashCode();
-        result = 31 * result + size.hashCode();
-        result = 31 * result + cost.hashCode();
+        int result = size != null ? size.hashCode() : 0;
+        result = 31 * result + (cost != null ? cost.hashCode() : 0);
         return result;
     }
 
     @Override
     public String toString() {
         return "Toy{" +
-                "toyType=" + toyType +
-                ", size=" + size +
+                "size=" + size +
                 ", cost=" + cost +
                 '}';
     }

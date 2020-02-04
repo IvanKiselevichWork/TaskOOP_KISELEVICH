@@ -17,7 +17,6 @@ public class Child {
     private int hours;
 
     private BigDecimal budget;
-    private List<Toy> toys;
 
     public static class Builder {
 
@@ -104,14 +103,6 @@ public class Child {
         this.budget = budget;
     }
 
-    public List<Toy> getToys() {
-        return toys;
-    }
-
-    public void setToys(List<Toy> toys) {
-        this.toys = toys;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -139,10 +130,13 @@ public class Child {
         return firstName + " " + lastName;
     }
 
-    public void playWithToys() {
-        for(Toy toy : toys) {
-            toy.play();
-            LOGGER.info("Child: " + this + " play with toy: " + toy);
+    public void playWithToys(List<Toy> toys) {
+        for (int i = 0; i < hours; i++) {
+            LOGGER.info("Child: " + this + " play " + hours + " hour");
+            for (Toy toy : toys) {
+                toy.play();
+                LOGGER.info("Child: " + this + " play with toy: " + toy);
+            }
         }
     }
 }

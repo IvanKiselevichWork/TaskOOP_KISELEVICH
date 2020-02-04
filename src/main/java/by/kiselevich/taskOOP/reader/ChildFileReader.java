@@ -24,6 +24,10 @@ public class ChildFileReader {
         this.childrenFilepath = childrenFilepath;
     }
 
+    public void setChildrenFilepath(String childrenFilepath) {
+        this.childrenFilepath = childrenFilepath;
+    }
+
     public List<Child> readChildrenFromFile() {
         List<Child> children = new ArrayList<>();
 

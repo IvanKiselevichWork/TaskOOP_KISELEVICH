@@ -7,15 +7,15 @@ import java.math.BigDecimal;
 
 public class ToyValidator {
 
-    public boolean checkToyTypeForNull(ToyType toyType) {
+    public boolean isToyTypeNotNull(ToyType toyType) {
         return toyType != null;
     }
 
-    public boolean checkToySizeForNull(ToySize toySize) {
+    public boolean isToySizeNotNull(ToySize toySize) {
         return toySize != null;
     }
 
-    public boolean checkCostForNullAndPositivity(BigDecimal cost) {
+    public boolean isCostNotNullAndPositive(BigDecimal cost) {
         return cost != null && cost.compareTo(BigDecimal.valueOf(0)) > 0;
     }
 }

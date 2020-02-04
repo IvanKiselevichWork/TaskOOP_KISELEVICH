@@ -64,9 +64,9 @@ public class ToyParser {
             throw new ToyParseException(INVALID_TOY_COUNT.getMessage());
         }
         int count = stringParser.parseStringToInt(toyArray[3]);
-        if (toyValidator.checkToyTypeForNull(toyType)
-                && toyValidator.checkToySizeForNull(toySize)
-                && toyValidator.checkCostForNullAndPositivity(cost)
+        if (toyValidator.isToyTypeNotNull(toyType)
+                && toyValidator.isToySizeNotNull(toySize)
+                && toyValidator.isCostNotNullAndPositive(cost)
                 && count > 0) {
             LOGGER.info("Toy parsed");
             return toyFactory.createToys(toyType, toySize, cost, count);

@@ -2,13 +2,10 @@ package by.kiselevich.taskOOP.service;
 
 import by.kiselevich.taskOOP.entity.child.Child;
 import by.kiselevich.taskOOP.factory.ToyRepositoryFactory;
-import by.kiselevich.taskOOP.reader.ToyReader;
+import by.kiselevich.taskOOP.reader.ToyFileReader;
 import by.kiselevich.taskOOP.repository.ToyRepository;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class ChildRoomService {
 
@@ -30,7 +27,7 @@ public class ChildRoomService {
     }
 
     private void initToys() {
-        toyRepository.addToys(ToyReader.getInstance().readToys());
+        toyRepository.addToys(ToyFileReader.getInstance().readToys());
     }
 
     public void serveChild(Child child) {

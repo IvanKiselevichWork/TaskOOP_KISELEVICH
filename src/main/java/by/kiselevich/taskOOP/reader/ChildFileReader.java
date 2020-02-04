@@ -19,7 +19,7 @@ public class ChildFileReader {
     private ChildParser childParser;
     private String childrenFilepath;
 
-    private ChildFileReader(String childrenFilepath) {
+    public ChildFileReader(String childrenFilepath) {
         childParser = new ChildParser();
         this.childrenFilepath = childrenFilepath;
     }

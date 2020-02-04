@@ -20,7 +20,7 @@ public class ToyFactory {
     }
 
     public static ToyFactory getInstance() {
-        return ToyFactory.ToyFactoryHolder.instance;
+        return ToyFactoryHolder.instance;
     }
     
     public List<Toy> getToys(ToyType toyType, ToySize toySize, BigDecimal cost, int count) {

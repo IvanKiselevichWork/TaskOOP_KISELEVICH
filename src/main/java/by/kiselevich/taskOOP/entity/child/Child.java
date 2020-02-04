@@ -9,7 +9,7 @@ import org.apache.logging.log4j.Logger;
 import java.math.BigDecimal;
 import java.util.List;
 
-public abstract class Child implements Runnable {
+public abstract class Child {
 
     private static final Logger logger = LogManager.getLogger(Child.class);
 
@@ -74,18 +74,6 @@ public abstract class Child implements Runnable {
     }
 
     public abstract boolean receiveToys(ToyRepository toyRepository);
-
-    @Override
-    public void run() {
-        try {
-            Thread.sleep(hours * 1000);
-            ToyRepositoryFactory.getInstance().getToyRepository().addToys(toys);
-            toys = null;
-            logger.info("Child " + this + " served");
-        } catch (InterruptedException e) {
-            logger.error(e);
-        }
-    }
 
     protected void removeMoneyForToys() {
         BigDecimal sumToys = BigDecimal.valueOf(0);

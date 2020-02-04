@@ -26,13 +26,6 @@ public class ChildRoomController {
 
 
     public void serveChildren() {
-        logger.info("Start controller");
-        while (!childRepository.getAllChildren().isEmpty()) {
-            logger.info("controller work");
-            childRoomService.serveChild(childRepository.getChild());
-        }
-        logger.info("Wait for children");
-        childRoomService.waitForChildren();
-        logger.info("End controller");
+        //todo
     }
 }

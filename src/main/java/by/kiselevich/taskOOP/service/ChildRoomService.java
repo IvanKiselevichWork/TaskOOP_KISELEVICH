@@ -4,13 +4,19 @@ import by.kiselevich.taskOOP.entity.child.Child;
 import by.kiselevich.taskOOP.entity.toy.Toy;
 import by.kiselevich.taskOOP.entity.toy.ToySize;
 import by.kiselevich.taskOOP.factory.ToyRepositoryFactory;
+import by.kiselevich.taskOOP.reader.ChildFileReader;
 import by.kiselevich.taskOOP.reader.ToyFileReader;
 import by.kiselevich.taskOOP.repository.ToyRepository;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.io.File;
 import java.math.BigDecimal;
+import java.net.URISyntaxException;
+import java.net.URL;
+import java.nio.file.Paths;
 import java.util.List;
+import java.util.Optional;
 
 public class ChildRoomService {
 
@@ -33,8 +39,19 @@ public class ChildRoomService {
     }
 
     private void initToys() {
-        toyRepository.addToys(new ToyFileReader(TOYS_FILEPATH).readToys());
-        LOGGER.info("Toys initiated");
+        Optional<URL> optionalURL = Optional.ofNullable(
+                this.getClass().getClassLoader().getResource(TOYS_FILEPATH));
+        if (optionalURL.isPresent()) {
+            try {
+                String path =  Paths.get(optionalURL.get().toURI()).toString();
+                toyRepository.addToys(new ToyFileReader(path).readToys());
+                LOGGER.info("Toys initiated");
+            } catch (URISyntaxException e) {
+                LOGGER.warn(e);
+            }
+        } else {
+            LOGGER.warn("Toys file not found: " + TOYS_FILEPATH);
+        }
     }
 
     public void serveChild(Child child) {

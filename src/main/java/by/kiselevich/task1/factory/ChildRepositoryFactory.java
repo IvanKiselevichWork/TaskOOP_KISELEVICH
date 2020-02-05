@@ -4,6 +4,9 @@ import by.kiselevich.task1.repository.ChildRepository;
 import by.kiselevich.task1.repository.impl.ArrayListChildRepository;
 
 public class ChildRepositoryFactory {
+
+    private final ChildRepository childRepository = new ArrayListChildRepository();
+
     private ChildRepositoryFactory() {
 
     }
@@ -17,6 +20,6 @@ public class ChildRepositoryFactory {
     }
 
     public ChildRepository getChildRepository() {
-        return new ArrayListChildRepository();
+        return childRepository;
     }
 }

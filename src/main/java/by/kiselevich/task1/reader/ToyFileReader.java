@@ -24,6 +24,10 @@ public class ToyFileReader {
         toyParser = new ToyParser();
     }
 
+    public void setToyFilepath(String toyFilepath) {
+        this.toyFilepath = toyFilepath;
+    }
+
     public List<Toy> readToys() {
         List<Toy> toys = new ArrayList<>();
 

@@ -11,7 +11,10 @@ public class ChildValidator {
 
     private static final String NAME_REGEX = "[a-zA-Z\\._\\-]{2,30}";
 
-    public boolean isName(String firstName) {
+    public boolean isNameAndNotNull(String firstName) {
+        if (firstName == null) {
+            return false;
+        }
         Pattern pattern = Pattern.compile(NAME_REGEX);
         Matcher matcher = pattern.matcher(firstName);
         return matcher.matches();

@@ -1,7 +1,6 @@
 package by.kiselevich.task1.parser;
 
 import by.kiselevich.task1.entity.child.Child;
-import by.kiselevich.task1.exception.ChildExceptionMessages;
 import by.kiselevich.task1.exception.ChildParseException;
 import by.kiselevich.task1.validator.ChildValidator;
 import by.kiselevich.task1.validator.StringValidator;
@@ -62,8 +61,8 @@ public class ChildParser {
         }
         hours = stringParser.parseStringToInt(childArray[HOURS_INDEX]);
 
-        if (childValidator.isName(firstName)
-                && childValidator.isName(lastName)
+        if (childValidator.isNameAndNotNull(firstName)
+                && childValidator.isNameAndNotNull(lastName)
                 && childValidator.isAgeChildish(age)
                 && childValidator.isBudgetNotNullAndPositive(budget)
                 && childValidator.isHoursPositive(hours)) {

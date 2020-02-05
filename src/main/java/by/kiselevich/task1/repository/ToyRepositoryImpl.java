@@ -1,4 +1,4 @@
-package by.kiselevich.task1.repository.impl;
+package by.kiselevich.task1.repository;
 
 import by.kiselevich.task1.comparator.ToyComparatorByCostReversedThenSizeReversed;
 import by.kiselevich.task1.entity.toy.Toy;
@@ -8,7 +8,7 @@ import by.kiselevich.task1.repository.ToyRepository;
 import java.math.BigDecimal;
 import java.util.*;
 
-public class ArrayListToyRepository implements ToyRepository {
+public class ToyRepositoryImpl implements ToyRepository {
 
     private List<Toy> toys = new ArrayList<>();
 

@@ -1,11 +1,11 @@
 package by.kiselevich.task1.factory;
 
 import by.kiselevich.task1.repository.ToyRepository;
-import by.kiselevich.task1.repository.impl.ArrayListToyRepository;
+import by.kiselevich.task1.repository.ToyRepositoryImpl;
 
 public class ToyRepositoryFactory {
 
-    private final ToyRepository toyRepository = new ArrayListToyRepository();
+    private final ToyRepository toyRepository = new ToyRepositoryImpl();
 
     private ToyRepositoryFactory() {
 

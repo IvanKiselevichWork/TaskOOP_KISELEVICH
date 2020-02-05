@@ -1,11 +1,11 @@
 package by.kiselevich.task1.factory;
 
 import by.kiselevich.task1.repository.ChildRepository;
-import by.kiselevich.task1.repository.impl.ArrayListChildRepository;
+import by.kiselevich.task1.repository.ChildRepositoryImpl;
 
 public class ChildRepositoryFactory {
 
-    private final ChildRepository childRepository = new ArrayListChildRepository();
+    private final ChildRepository childRepository = new ChildRepositoryImpl();
 
     private ChildRepositoryFactory() {
 

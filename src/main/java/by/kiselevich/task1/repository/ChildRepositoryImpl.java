@@ -1,4 +1,4 @@
-package by.kiselevich.task1.repository.impl;
+package by.kiselevich.task1.repository;
 
 import by.kiselevich.task1.entity.child.Child;
 import by.kiselevich.task1.repository.ChildRepository;
@@ -6,7 +6,7 @@ import by.kiselevich.task1.repository.ChildRepository;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ArrayListChildRepository implements ChildRepository {
+public class ChildRepositoryImpl implements ChildRepository {
 
     private List<Child> children = new ArrayList<>();
 

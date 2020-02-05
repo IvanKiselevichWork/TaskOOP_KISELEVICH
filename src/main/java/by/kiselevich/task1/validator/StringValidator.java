@@ -17,9 +17,6 @@ public class StringValidator {
     }
 
     public <E extends Enum<E>> boolean isStringParsableToEnum(Class<E> enumClass, String string) {
-        if(!enumClass.isEnum()) {
-            return false;
-        }
 
         Set<String> enumStringSet = new HashSet<>();
         for (Enum<E> enumVal: enumClass.getEnumConstants()) {

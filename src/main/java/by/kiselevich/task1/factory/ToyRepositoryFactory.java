@@ -4,6 +4,9 @@ import by.kiselevich.task1.repository.ToyRepository;
 import by.kiselevich.task1.repository.impl.ArrayListToyRepository;
 
 public class ToyRepositoryFactory {
+
+    private final ToyRepository toyRepository = new ArrayListToyRepository();
+
     private ToyRepositoryFactory() {
 
     }
@@ -17,6 +20,6 @@ public class ToyRepositoryFactory {
     }
 
     public ToyRepository getToyRepository() {
-        return new ArrayListToyRepository();
+        return toyRepository;
     }
 }

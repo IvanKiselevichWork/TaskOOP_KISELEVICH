@@ -7,5 +7,4 @@ import java.util.List;
 public interface ChildRepository {
     void addChildren(List<Child> children);
     List<Child> getAllChildren();
-    Child getChild();
 }

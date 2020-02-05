@@ -19,9 +19,4 @@ public class ArrayListChildRepository implements ChildRepository {
     public List<Child> getAllChildren() {
         return new ArrayList<>(children);
     }
-
-    @Override
-    public Child getChild() {
-        return children.remove(children.size() - 1);
-    }
 }

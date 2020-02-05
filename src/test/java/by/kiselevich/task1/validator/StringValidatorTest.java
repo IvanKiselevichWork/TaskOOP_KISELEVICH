@@ -4,8 +4,6 @@ import by.kiselevich.task1.entity.toy.ToySize;
 import org.junit.Assert;
 import org.junit.Test;
 
-import java.util.EnumSet;
-
 public class StringValidatorTest extends Assert {
 
     StringValidator stringValidator = new StringValidator();

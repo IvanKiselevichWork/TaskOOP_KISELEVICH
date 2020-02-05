@@ -3,7 +3,6 @@ package by.kiselevich.task1.repository;
 import by.kiselevich.task1.comparator.ToyComparatorByCostReversedThenSizeReversed;
 import by.kiselevich.task1.entity.toy.Toy;
 import by.kiselevich.task1.entity.toy.ToySize;
-import by.kiselevich.task1.repository.ToyRepository;
 
 import java.math.BigDecimal;
 import java.util.*;

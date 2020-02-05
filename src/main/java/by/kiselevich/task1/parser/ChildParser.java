@@ -1,6 +1,7 @@
 package by.kiselevich.task1.parser;
 
 import by.kiselevich.task1.entity.child.Child;
+import by.kiselevich.task1.exception.ChildExceptionMessages;
 import by.kiselevich.task1.exception.ChildParseException;
 import by.kiselevich.task1.validator.ChildValidator;
 import by.kiselevich.task1.validator.StringValidator;
@@ -8,6 +9,8 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.math.BigDecimal;
+
+import static by.kiselevich.task1.exception.ChildExceptionMessages.*;
 
 public class ChildParser {
 
@@ -33,7 +36,7 @@ public class ChildParser {
     public Child parseChildFromString(String string) throws ChildParseException {
         String[] childArray = string.split(DELIMITER);
         if (childArray.length != DATA_ARRAY_SIZE) {
-            throw new ChildParseException();
+            throw new ChildParseException(INVALID_DATA_ARRAY_LENGTH.getMessage());
         }
 
         String firstName = childArray[FIRST_NAME_INDEX];
@@ -42,19 +45,19 @@ public class ChildParser {
 
         int age;
         if (!stringValidator.isStringParsableToInt(childArray[AGE_INDEX])) {
-            throw new ChildParseException();
+            throw new ChildParseException(INVALID_CHILD_AGE.getMessage());
         }
         age = stringParser.parseStringToInt(childArray[AGE_INDEX]);
 
         BigDecimal budget;
         if (!stringValidator.isStringParsableToBigDecimal(childArray[BUDGET_INDEX])) {
-            throw new ChildParseException();
+            throw new ChildParseException(INVALID_CHILD_BUDGET.getMessage());
         }
         budget = stringParser.parseStringToBigDecimal(childArray[BUDGET_INDEX]);
 
         int hours;
         if (!stringValidator.isStringParsableToInt(childArray[HOURS_INDEX])) {
-            throw new ChildParseException();
+            throw new ChildParseException(INVALID_CHILD_HOURS.getMessage());
 
         }
         hours = stringParser.parseStringToInt(childArray[HOURS_INDEX]);
@@ -74,7 +77,7 @@ public class ChildParser {
                     .hours(hours)
                     .build();
         } else {
-            throw new ChildParseException();
+            throw new ChildParseException(CHILD_NOT_PASS_VALIDATION.getMessage());
         }
     }
 }

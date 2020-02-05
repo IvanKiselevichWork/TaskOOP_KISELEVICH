@@ -10,7 +10,7 @@ import java.util.InputMismatchException;
 public class StringParserTest extends Assert {
 
     @Test
-    public void parseStringToBigDecimalTestPositive() throws ChildParseException {
+    public void parseStringToBigDecimalTestPositive() {
         String string = "234523";
         StringParser stringParser = new StringParser();
         BigDecimal bigDecimal = stringParser.parseStringToBigDecimal(string);
@@ -18,14 +18,14 @@ public class StringParserTest extends Assert {
     }
 
     @Test(expected = InputMismatchException.class)
-    public void parseStringToBigDecimalTestNegative() throws ChildParseException {
+    public void parseStringToBigDecimalTestNegative() {
         String string = "asdfasdf";
         StringParser stringParser = new StringParser();
         stringParser.parseStringToBigDecimal(string);
     }
 
     @Test
-    public void parseStringToIntTestPositive() throws ChildParseException {
+    public void parseStringToIntTestPositive() {
         String string = "234523";
         StringParser stringParser = new StringParser();
         int num = stringParser.parseStringToInt(string);
@@ -33,7 +33,7 @@ public class StringParserTest extends Assert {
     }
 
     @Test(expected = InputMismatchException.class)
-    public void parseStringToIntTestNegative() throws ChildParseException {
+    public void parseStringToIntTestNegative() {
         String string = "asdfasdf";
         StringParser stringParser = new StringParser();
         stringParser.parseStringToInt(string);

@@ -41,7 +41,7 @@ public class ToyFileReaderTest extends Assert {
     }
 
     @Test
-    public void readToysTestNegative1() throws IOException {
+    public void readToysTestNegative1() {
         String wrongFilepath = "asdfasfdasdf.sdfasdf";
 
         toyFileReader.setToyFilepath(wrongFilepath);

@@ -42,7 +42,7 @@ public class ChildFileReaderTest extends Assert {
     }
 
     @Test
-    public void readChildrenFromFileTestNegative1() throws IOException {
+    public void readChildrenFromFileTestNegative1() {
         String wrongFilepath = "asdfasfdasdfasdf.txtx";
 
         childFileReader.setChildrenFilepath(wrongFilepath);

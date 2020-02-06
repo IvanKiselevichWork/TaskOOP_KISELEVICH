@@ -75,8 +75,7 @@ public class ChildParser {
                     .budget(budget)
                     .hours(hours)
                     .build();
-        } else {
-            throw new ChildParseException(CHILD_NOT_PASS_VALIDATION.getMessage());
         }
+        throw new ChildParseException(CHILD_NOT_PASS_VALIDATION.getMessage());
     }
 }

@@ -70,8 +70,7 @@ public class ToyParser {
                 && count > 0) {
             LOGGER.info("Toy parsed");
             return toyFactory.createToys(toyType, toySize, cost, count);
-        } else {
-            throw new ToyParseException(TOY_NOT_PASS_VALIDATION.getMessage());
         }
+        throw new ToyParseException(TOY_NOT_PASS_VALIDATION.getMessage());
     }
 }

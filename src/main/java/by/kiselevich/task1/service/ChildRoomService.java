@@ -6,7 +6,7 @@ import by.kiselevich.task1.entity.toy.ToySize;
 import by.kiselevich.task1.factory.ToyRepositoryFactory;
 import by.kiselevich.task1.reader.ToyFileReader;
 import by.kiselevich.task1.repository.toy.ToyRepository;
-import by.kiselevich.task1.specification.toy.GetToyForSummaryCostWithSizes;
+import by.kiselevich.task1.specification.toy.GetToysForSummaryCostWithSizes;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -63,7 +63,7 @@ public class ChildRoomService {
     public void serveChild(Child child) {
         BigDecimal budgetPerHour = child.getBudget().divide(BigDecimal.valueOf(child.getHours()), BigDecimal.ROUND_DOWN);
         ToySize[] toysSizes = getToysSizesByChildAge(child.getAge());
-        List<Toy> toys = toyRepository.query(new GetToyForSummaryCostWithSizes(budgetPerHour, toysSizes));
+        List<Toy> toys = toyRepository.query(new GetToysForSummaryCostWithSizes(budgetPerHour, toysSizes));
         if (!toys.isEmpty()) {
             BigDecimal totalCostOfToys = BigDecimal.valueOf(0);
             for (Toy toy : toys) {

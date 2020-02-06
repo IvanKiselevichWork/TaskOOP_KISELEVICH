@@ -7,12 +7,12 @@ import by.kiselevich.task1.repository.Repository;
 import java.math.BigDecimal;
 import java.util.*;
 
-public class GetToyForSummaryCostWithSizes implements ToySpecification {
+public class GetToysForSummaryCostWithSizes implements ToySpecification {
 
     private BigDecimal cost;
     private Set<ToySize> sizes;
 
-    public GetToyForSummaryCostWithSizes(BigDecimal cost, ToySize ... sizes) {
+    public GetToysForSummaryCostWithSizes(BigDecimal cost, ToySize ... sizes) {
         this.cost = cost;
         this.sizes = EnumSet.copyOf(Arrays.asList(sizes));
     }

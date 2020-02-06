@@ -17,7 +17,7 @@ public class StringParserTest extends Assert {
         assertEquals(bigDecimal, BigDecimal.valueOf(234523));
     }
 
-    @Test(expected = InputMismatchException.class)
+    @Test(expected = NumberFormatException.class)
     public void parseStringToBigDecimalTestNegative() {
         String string = "asdfasdf";
         StringParser stringParser = new StringParser();
@@ -32,7 +32,7 @@ public class StringParserTest extends Assert {
         assertEquals(num, 234523);
     }
 
-    @Test(expected = InputMismatchException.class)
+    @Test(expected = NumberFormatException.class)
     public void parseStringToIntTestNegative() {
         String string = "asdfasdf";
         StringParser stringParser = new StringParser();

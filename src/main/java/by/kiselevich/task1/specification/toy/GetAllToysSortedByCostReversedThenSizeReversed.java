@@ -8,7 +8,7 @@ import by.kiselevich.task1.repository.Repository;
 import java.math.BigDecimal;
 import java.util.*;
 
-public class GetAllToySortedByCostReversedThenSizeReversed implements ToySpecification {
+public class GetAllToysSortedByCostReversedThenSizeReversed implements ToySpecification {
 
     @Override
     public List<Toy> query(Repository<Toy> repository) {

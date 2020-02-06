@@ -10,7 +10,7 @@ public enum ChildExceptionMessages {
 
     private String message;
 
-    private ChildExceptionMessages(String message) {
+    ChildExceptionMessages(String message) {
         this.message = message;
     }
 

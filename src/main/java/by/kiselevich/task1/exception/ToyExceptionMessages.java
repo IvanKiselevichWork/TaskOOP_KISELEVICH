@@ -11,7 +11,7 @@ public enum ToyExceptionMessages {
 
     private String message;
 
-    private ToyExceptionMessages(String message) {
+    ToyExceptionMessages(String message) {
         this.message = message;
     }
 

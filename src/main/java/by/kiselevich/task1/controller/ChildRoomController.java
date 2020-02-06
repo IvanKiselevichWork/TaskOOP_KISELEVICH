@@ -13,7 +13,6 @@ import org.apache.logging.log4j.Logger;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.file.Paths;
-import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 
@@ -24,13 +23,11 @@ public class ChildRoomController {
 
     private ChildRepository childRepository;
     private ChildRoomService childRoomService;
-    private Comparator<Child> childComparator;
 
     public ChildRoomController() {
         childRepository = ChildRepositoryFactory.getInstance().getChildRepository();
         childRoomService = ChildRoomService.getInstance();
         initChildren();
-        childComparator = new ChildComparatorByAgeThenLastNameThenFirstName();
     }
 
     private void initChildren() {

@@ -9,8 +9,8 @@ public abstract class Toy {
 
     protected final Logger LOGGER = LogManager.getLogger(Toy.class);
 
-    private ToySize size;
-    private BigDecimal cost;
+    protected ToySize size;
+    protected BigDecimal cost;
 
     public Toy() {
 

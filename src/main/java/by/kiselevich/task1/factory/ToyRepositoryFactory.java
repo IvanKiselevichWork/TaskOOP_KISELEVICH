@@ -1,7 +1,7 @@
 package by.kiselevich.task1.factory;
 
-import by.kiselevich.task1.repository.ToyRepository;
-import by.kiselevich.task1.repository.ToyRepositoryImpl;
+import by.kiselevich.task1.repository.toy.ToyRepository;
+import by.kiselevich.task1.repository.toy.ToyRepositoryImpl;
 
 public class ToyRepositoryFactory {
 

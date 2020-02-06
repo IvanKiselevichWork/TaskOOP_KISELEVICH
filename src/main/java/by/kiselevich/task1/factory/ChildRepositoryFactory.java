@@ -1,7 +1,7 @@
 package by.kiselevich.task1.factory;
 
-import by.kiselevich.task1.repository.ChildRepository;
-import by.kiselevich.task1.repository.ChildRepositoryImpl;
+import by.kiselevich.task1.repository.child.ChildRepository;
+import by.kiselevich.task1.repository.child.ChildRepositoryImpl;
 
 public class ChildRepositoryFactory {
 

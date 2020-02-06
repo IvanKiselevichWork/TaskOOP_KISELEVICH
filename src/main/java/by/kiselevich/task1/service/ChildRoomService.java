@@ -5,7 +5,8 @@ import by.kiselevich.task1.entity.toy.Toy;
 import by.kiselevich.task1.entity.toy.ToySize;
 import by.kiselevich.task1.factory.ToyRepositoryFactory;
 import by.kiselevich.task1.reader.ToyFileReader;
-import by.kiselevich.task1.repository.ToyRepository;
+import by.kiselevich.task1.repository.toy.ToyRepository;
+import by.kiselevich.task1.specification.toy.GetToyForSummaryCostWithSizes;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -49,7 +50,7 @@ public class ChildRoomService {
         if (optionalURL.isPresent()) {
             try {
                 String path =  Paths.get(optionalURL.get().toURI()).toString();
-                toyRepository.addToys(new ToyFileReader(path).readToys());
+                toyRepository.addAll(new ToyFileReader(path).readToys());
                 LOGGER.info("Toys initiated");
             } catch (URISyntaxException e) {
                 LOGGER.warn(e);
@@ -62,7 +63,7 @@ public class ChildRoomService {
     public void serveChild(Child child) {
         BigDecimal budgetPerHour = child.getBudget().divide(BigDecimal.valueOf(child.getHours()), BigDecimal.ROUND_DOWN);
         ToySize[] toysSizes = getToysSizesByChildAge(child.getAge());
-        List<Toy> toys = toyRepository.getToysForSummaryCostWithSizes(budgetPerHour, toysSizes);
+        List<Toy> toys = toyRepository.query(new GetToyForSummaryCostWithSizes(budgetPerHour, toysSizes));
         if (!toys.isEmpty()) {
             BigDecimal totalCostOfToys = BigDecimal.valueOf(0);
             for (Toy toy : toys) {

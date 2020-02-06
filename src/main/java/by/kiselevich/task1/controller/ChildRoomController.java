@@ -4,8 +4,9 @@ import by.kiselevich.task1.comparator.ChildComparatorByAgeThenLastNameThenFirstN
 import by.kiselevich.task1.entity.child.Child;
 import by.kiselevich.task1.factory.ChildRepositoryFactory;
 import by.kiselevich.task1.reader.ChildFileReader;
-import by.kiselevich.task1.repository.ChildRepository;
+import by.kiselevich.task1.repository.child.ChildRepository;
 import by.kiselevich.task1.service.ChildRoomService;
+import by.kiselevich.task1.specification.child.GetAllChildrenSortedByAgeThenFirstNameThenLastName;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -38,7 +39,7 @@ public class ChildRoomController {
         if (optionalURL.isPresent()) {
             try {
                 String path = Paths.get(optionalURL.get().toURI()).toString();
-                childRepository.addChildren(new ChildFileReader(path).readChildrenFromFile());
+                childRepository.addAll(new ChildFileReader(path).readChildrenFromFile());
                 LOGGER.info("Children initiated");
             } catch (URISyntaxException e) {
                 LOGGER.warn(e);
@@ -49,8 +50,7 @@ public class ChildRoomController {
     }
 
     public void serveChildren() {
-        List<Child> children = childRepository.getAllChildren();
-        children.sort(childComparator);
+        List<Child> children = childRepository.query(new GetAllChildrenSortedByAgeThenFirstNameThenLastName());
         for (Child child : children) {
             LOGGER.info("child " + child + "start serving, age = " + child.getAge());
             childRoomService.serveChild(child);

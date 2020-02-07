@@ -1,6 +1,5 @@
 package by.kiselevich.task1.specification.toy;
 
-import by.kiselevich.task1.comparator.ToyComparatorByCostReversedThenSizeReversed;
 import by.kiselevich.task1.entity.toy.Ball;
 import by.kiselevich.task1.entity.toy.Toy;
 import by.kiselevich.task1.entity.toy.ToySize;

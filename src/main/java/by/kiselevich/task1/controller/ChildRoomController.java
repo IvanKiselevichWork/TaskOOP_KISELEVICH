@@ -1,6 +1,5 @@
 package by.kiselevich.task1.controller;
 
-import by.kiselevich.task1.comparator.ChildComparatorByAgeThenLastNameThenFirstName;
 import by.kiselevich.task1.entity.child.Child;
 import by.kiselevich.task1.factory.ChildRepositoryFactory;
 import by.kiselevich.task1.reader.ChildFileReader;

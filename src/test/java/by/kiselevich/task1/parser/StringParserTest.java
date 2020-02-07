@@ -1,11 +1,9 @@
 package by.kiselevich.task1.parser;
 
-import by.kiselevich.task1.exception.ChildParseException;
 import org.junit.Assert;
 import org.junit.Test;
 
 import java.math.BigDecimal;
-import java.util.InputMismatchException;
 
 public class StringParserTest extends Assert {
 

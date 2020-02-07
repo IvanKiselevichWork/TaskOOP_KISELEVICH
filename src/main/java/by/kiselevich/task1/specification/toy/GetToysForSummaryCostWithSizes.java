@@ -20,13 +20,10 @@ public class GetToysForSummaryCostWithSizes implements ToySpecification {
     @Override
     public List<Toy> query(Repository<Toy> repository) {
         List<Toy> result = new ArrayList<>();
-        Iterator<Toy> iterator = repository.query(new GetAllToysSortedByCostReversedThenSizeReversed()).iterator();
-        while(iterator.hasNext()) {
-            Toy toy = iterator.next();
+        for (Toy toy : repository.getAll()) {
             if (toy.getCost().compareTo(cost) < 0 && sizes.contains(toy.getSize())) {
                 cost = cost.subtract(toy.getCost());
                 result.add(toy);
-                iterator.remove();
             }
         }
         return result;

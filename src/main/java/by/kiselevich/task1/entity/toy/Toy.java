@@ -68,19 +68,12 @@ public abstract class Toy {
 
         Toy toy = (Toy) o;
 
-        if (id != toy.id) return false;
-        if (size != toy.size) return false;
-        if (cost != null ? !cost.equals(toy.cost) : toy.cost != null) return false;
-        return toyType == toy.toyType;
+        return id == toy.id;
     }
 
     @Override
     public int hashCode() {
-        int result = id;
-        result = 31 * result + (size != null ? size.hashCode() : 0);
-        result = 31 * result + (cost != null ? cost.hashCode() : 0);
-        result = 31 * result + (toyType != null ? toyType.hashCode() : 0);
-        return result;
+        return id;
     }
 
     @Override

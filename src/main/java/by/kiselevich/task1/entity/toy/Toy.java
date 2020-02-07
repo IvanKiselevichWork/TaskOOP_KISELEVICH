@@ -7,20 +7,32 @@ import java.math.BigDecimal;
 
 public abstract class Toy {
 
-    protected final Logger LOGGER = LogManager.getLogger(Toy.class);
+    protected final Logger LOGGER = LogManager.getLogger(this.getClass());
 
+    private static int idCounter = 0;
+
+    private static synchronized int getNextId() {
+        return idCounter++;
+    }
+
+    protected int id;
     protected ToySize size;
     protected BigDecimal cost;
     protected ToyType toyType;
 
     public Toy() {
-
+        this.id = getNextId();
     }
 
     public Toy(ToySize size, BigDecimal cost, ToyType toyType) {
+        this.id = getNextId();
         this.size = size;
         this.cost = cost;
         this.toyType = toyType;
+    }
+
+    public int getId() {
+        return id;
     }
 
     public ToySize getSize() {
@@ -56,6 +68,7 @@ public abstract class Toy {
 
         Toy toy = (Toy) o;
 
+        if (id != toy.id) return false;
         if (size != toy.size) return false;
         if (cost != null ? !cost.equals(toy.cost) : toy.cost != null) return false;
         return toyType == toy.toyType;
@@ -63,7 +76,8 @@ public abstract class Toy {
 
     @Override
     public int hashCode() {
-        int result = size != null ? size.hashCode() : 0;
+        int result = id;
+        result = 31 * result + (size != null ? size.hashCode() : 0);
         result = 31 * result + (cost != null ? cost.hashCode() : 0);
         result = 31 * result + (toyType != null ? toyType.hashCode() : 0);
         return result;

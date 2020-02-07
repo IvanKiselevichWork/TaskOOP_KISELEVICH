@@ -11,14 +11,16 @@ public abstract class Toy {
 
     protected ToySize size;
     protected BigDecimal cost;
+    protected ToyType toyType;
 
     public Toy() {
 
     }
 
-    public Toy(ToySize size, BigDecimal cost) {
+    public Toy(ToySize size, BigDecimal cost, ToyType toyType) {
         this.size = size;
         this.cost = cost;
+        this.toyType = toyType;
     }
 
     public ToySize getSize() {
@@ -35,6 +37,14 @@ public abstract class Toy {
 
     public void setCost(BigDecimal cost) {
         this.cost = cost;
+    }
+
+    public ToyType getToyType() {
+        return toyType;
+    }
+
+    public void setToyType(ToyType toyType) {
+        this.toyType = toyType;
     }
 
     public abstract void play();

@@ -4,8 +4,8 @@ import java.math.BigDecimal;
 
 public class Doll extends Toy {
 
-    public Doll(ToySize size, BigDecimal cost) {
-        super(size, cost);
+    public Doll(ToySize size, BigDecimal cost, ToyType toyType) {
+        super(size, cost, toyType);
     }
 
     @Override

@@ -31,16 +31,16 @@ public class ToyFactory {
         Toy toy = null;
         switch (toyType) {
             case BALL:
-                toy = new Ball(toySize, cost);
+                toy = new Ball(toySize, cost, toyType);
                 break;
             case CAR:
-                toy = new Car(toySize, cost);
+                toy = new Car(toySize, cost, toyType);
                 break;
             case CUBE:
-                toy = new Cube(toySize, cost);
+                toy = new Cube(toySize, cost, toyType);
                 break;
             case DOLL:
-                toy = new Doll(toySize, cost);
+                toy = new Doll(toySize, cost, toyType);
                 break;
         }
         return toy;

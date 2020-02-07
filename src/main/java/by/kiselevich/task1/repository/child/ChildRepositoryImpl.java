@@ -2,13 +2,14 @@ package by.kiselevich.task1.repository.child;
 
 import by.kiselevich.task1.entity.child.Child;
 import by.kiselevich.task1.specification.Specification;
-
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class ChildRepositoryImpl implements ChildRepository {
 
-    private List<Child> children = new ArrayList<>();
+    private Set<Child> children = new HashSet<>();
 
     @Override
     public void addAll(List<Child> list) {
@@ -37,10 +38,8 @@ public class ChildRepositoryImpl implements ChildRepository {
 
     @Override
     public void update(Child child) {
-        for (int i = 0; i < children.size(); i++) {
-            if (children.get(i).getId() == child.getId()) {
-                children.set(i, child);
-            }
+        if (children.remove(child)) {
+            children.add(child);
         }
     }
 }

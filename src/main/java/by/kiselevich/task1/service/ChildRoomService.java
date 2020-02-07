@@ -7,6 +7,7 @@ import by.kiselevich.task1.entity.toy.ToyType;
 import by.kiselevich.task1.factory.ToyRepositoryFactory;
 import by.kiselevich.task1.reader.ToyFileReader;
 import by.kiselevich.task1.repository.toy.ToyRepository;
+import by.kiselevich.task1.specification.toy.GetAllToysSortedByCost;
 import by.kiselevich.task1.specification.toy.GetToysBySizes;
 import by.kiselevich.task1.specification.toy.GetToysByTypes;
 import by.kiselevich.task1.specification.toy.GetToysForSummaryCostWithSizes;
@@ -84,6 +85,10 @@ public class ChildRoomService {
 
     public List<Toy> getToyBySize(ToySize ... toySizes) {
         return toyRepository.query(new GetToysBySizes(toySizes));
+    }
+
+    public List<Toy> getAllToysSortedByCost() {
+        return toyRepository.query(new GetAllToysSortedByCost());
     }
 
     private ToySize[] getToysSizesByChildAge(int age) {

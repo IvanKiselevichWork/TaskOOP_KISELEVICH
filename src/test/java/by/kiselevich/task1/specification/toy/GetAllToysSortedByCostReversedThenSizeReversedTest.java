@@ -17,7 +17,7 @@ import java.util.List;
 public class GetAllToysSortedByCostReversedThenSizeReversedTest extends Assert {
 
     @Test
-    public void compareToysByCostTest() {
+    public void sortToysByCostReversedTest() {
         Toy toy1 = new Ball(ToySize.SMALL, BigDecimal.valueOf(10), ToyType.BALL);
         Toy toy2 = new Ball(ToySize.SMALL, BigDecimal.valueOf(20), ToyType.BALL);
         ToyRepository toyRepository = new ToyRepositoryImpl();
@@ -28,7 +28,7 @@ public class GetAllToysSortedByCostReversedThenSizeReversedTest extends Assert {
     }
 
     @Test
-    public void compareToysBySizeTest() {
+    public void sortToysBySizeReversedTest() {
         Toy toy1 = new Ball(ToySize.SMALL, BigDecimal.valueOf(10), ToyType.BALL);
         Toy toy2 = new Ball(ToySize.BIG, BigDecimal.valueOf(10), ToyType.BALL);
         ToyRepository toyRepository = new ToyRepositoryImpl();

@@ -15,7 +15,7 @@ import java.util.List;
 
 public class GetAllToysSortedByCostTest extends Assert {
     @Test
-    public void compareToysByCostTest() {
+    public void sortToysByCostTest() {
         Toy toy1 = new Ball(ToySize.SMALL, BigDecimal.valueOf(10), ToyType.BALL);
         Toy toy2 = new Ball(ToySize.SMALL, BigDecimal.valueOf(20), ToyType.BALL);
         ToyRepository toyRepository = new ToyRepositoryImpl();

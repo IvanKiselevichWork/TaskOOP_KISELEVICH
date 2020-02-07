@@ -11,11 +11,17 @@ public class Child {
 
     private static final Logger LOGGER = LogManager.getLogger(Child.class);
 
+    private static int idCounter = 0;
+
+    private static synchronized int getNextId() {
+        return idCounter++;
+    }
+
+    private int id;
     private String firstName;
     private String lastName;
     private int age;
     private int hours;
-
     private BigDecimal budget;
 
     public static class Builder {
@@ -61,6 +67,14 @@ public class Child {
             return child;
         }
 
+    }
+
+    public Child() {
+        this.id = getNextId();
+    }
+
+    public int getId() {
+        return id;
     }
 
     public String getFirstName() {
@@ -110,18 +124,18 @@ public class Child {
 
         Child child = (Child) o;
 
+        if (id != child.id) return false;
         if (age != child.age) return false;
-        if (hours != child.hours) return false;
         if (firstName != null ? !firstName.equals(child.firstName) : child.firstName != null) return false;
         return lastName != null ? lastName.equals(child.lastName) : child.lastName == null;
     }
 
     @Override
     public int hashCode() {
-        int result = firstName != null ? firstName.hashCode() : 0;
+        int result = id;
+        result = 31 * result + (firstName != null ? firstName.hashCode() : 0);
         result = 31 * result + (lastName != null ? lastName.hashCode() : 0);
         result = 31 * result + age;
-        result = 31 * result + hours;
         return result;
     }
 

@@ -7,7 +7,7 @@ import java.util.*;
 
 public class ToyRepositoryImpl implements ToyRepository {
 
-    private List<Toy> toys = new ArrayList<>();
+    private Set<Toy> toys = new HashSet<>();
 
     @Override
     public void addAll(List<Toy> list) {
@@ -36,10 +36,8 @@ public class ToyRepositoryImpl implements ToyRepository {
 
     @Override
     public void update(Toy toy) {
-        for (int i = 0; i < toys.size(); i++) {
-            if (toys.get(i).getId() == toy.getId()) {
-                toys.set(i, toy);
-            }
+        if (toys.remove(toy)) {
+            toys.add(toy);
         }
     }
 }

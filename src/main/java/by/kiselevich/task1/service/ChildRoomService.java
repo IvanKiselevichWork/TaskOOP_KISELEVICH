@@ -3,9 +3,11 @@ package by.kiselevich.task1.service;
 import by.kiselevich.task1.entity.child.Child;
 import by.kiselevich.task1.entity.toy.Toy;
 import by.kiselevich.task1.entity.toy.ToySize;
+import by.kiselevich.task1.entity.toy.ToyType;
 import by.kiselevich.task1.factory.ToyRepositoryFactory;
 import by.kiselevich.task1.reader.ToyFileReader;
 import by.kiselevich.task1.repository.toy.ToyRepository;
+import by.kiselevich.task1.specification.toy.GetToysByTypes;
 import by.kiselevich.task1.specification.toy.GetToysForSummaryCostWithSizes;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -73,6 +75,10 @@ public class ChildRoomService {
             child.setBudget(child.getBudget().subtract(totalCostOfToys));
             child.playWithToys(toys);
         }
+    }
+
+    public List<Toy> getToyByType(ToyType ... toyTypes) {
+        return toyRepository.query(new GetToysByTypes(toyTypes));
     }
 
     private ToySize[] getToysSizesByChildAge(int age) {

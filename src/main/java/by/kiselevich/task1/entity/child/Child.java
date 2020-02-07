@@ -117,6 +117,7 @@ public class Child {
         this.budget = budget;
     }
 
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -124,19 +125,12 @@ public class Child {
 
         Child child = (Child) o;
 
-        if (id != child.id) return false;
-        if (age != child.age) return false;
-        if (firstName != null ? !firstName.equals(child.firstName) : child.firstName != null) return false;
-        return lastName != null ? lastName.equals(child.lastName) : child.lastName == null;
+        return id == child.id;
     }
 
     @Override
     public int hashCode() {
-        int result = id;
-        result = 31 * result + (firstName != null ? firstName.hashCode() : 0);
-        result = 31 * result + (lastName != null ? lastName.hashCode() : 0);
-        result = 31 * result + age;
-        return result;
+        return id;
     }
 
     @Override

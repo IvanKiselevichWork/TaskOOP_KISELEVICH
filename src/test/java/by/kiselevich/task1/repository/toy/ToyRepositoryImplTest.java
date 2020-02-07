@@ -26,7 +26,7 @@ public class ToyRepositoryImplTest extends Assert {
     }
 
     @Test
-    public void addTest() {
+    public void addTest1() {
         Toy toy1 = new Ball(ToySize.SMALL, BigDecimal.valueOf(10), ToyType.BALL);
         ToyRepository toyRepository = new ToyRepositoryImpl();
         toyRepository.add(toy1);
@@ -36,7 +36,18 @@ public class ToyRepositoryImplTest extends Assert {
     }
 
     @Test
-    public void removeTest() {
+    public void addTest2() {
+        Toy toy1 = new Ball(ToySize.SMALL, BigDecimal.valueOf(10), ToyType.BALL);
+        ToyRepository toyRepository = new ToyRepositoryImpl();
+        toyRepository.add(toy1);
+        toyRepository.add(toy1);
+        List<Toy> toyList = toyRepository.getAll();
+        assertEquals(1, toyList.size());
+        assertTrue(toyList.contains(toy1));
+    }
+
+    @Test
+    public void removeTest1() {
         Toy toy1 = new Ball(ToySize.SMALL, BigDecimal.valueOf(10), ToyType.BALL);
         Toy toy2 = new Ball(ToySize.BIG, BigDecimal.valueOf(10), ToyType.BALL);
         ToyRepository toyRepository = new ToyRepositoryImpl();
@@ -48,12 +59,38 @@ public class ToyRepositoryImplTest extends Assert {
     }
 
     @Test
-    public void updateTest() {
+    public void removeTest2() {
+        Toy toy1 = new Ball(ToySize.SMALL, BigDecimal.valueOf(10), ToyType.BALL);
+        Toy toy2 = new Ball(ToySize.BIG, BigDecimal.valueOf(10), ToyType.BALL);
+        Toy toy3 = new Ball(ToySize.BIG, BigDecimal.valueOf(10), ToyType.BALL);
+        ToyRepository toyRepository = new ToyRepositoryImpl();
+        toyRepository.addAll(Arrays.asList(toy1, toy2));
+        toyRepository.remove(toy3);
+        List<Toy> toyList = toyRepository.getAll();
+        assertEquals(2, toyList.size());
+        assertTrue(toyList.contains(toy1));
+        assertTrue(toyList.contains(toy2));
+    }
+
+    @Test
+    public void updateTest1() {
         Toy toy1 = new Ball(ToySize.SMALL, BigDecimal.valueOf(10), ToyType.BALL);
         ToyRepository toyRepository = new ToyRepositoryImpl();
         toyRepository.add(toy1);
         toy1.setCost(BigDecimal.valueOf(20));
         toyRepository.update(toy1);
+        List<Toy> toyList = toyRepository.getAll();
+        assertEquals(1, toyList.size());
+        assertTrue(toyList.contains(toy1));
+    }
+
+    @Test
+    public void updateTest2() {
+        Toy toy1 = new Ball(ToySize.SMALL, BigDecimal.valueOf(10), ToyType.BALL);
+        Toy toy2 = new Ball(ToySize.SMALL, BigDecimal.valueOf(10), ToyType.BALL);
+        ToyRepository toyRepository = new ToyRepositoryImpl();
+        toyRepository.add(toy1);
+        toyRepository.update(toy2);
         List<Toy> toyList = toyRepository.getAll();
         assertEquals(1, toyList.size());
         assertTrue(toyList.contains(toy1));

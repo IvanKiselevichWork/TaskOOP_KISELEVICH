@@ -6,11 +6,15 @@ import by.kiselevich.task1.entity.child.Child;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Stream;
 
 public class ChildFileReader {
 
@@ -31,9 +35,9 @@ public class ChildFileReader {
     public List<Child> readChildrenFromFile() {
         List<Child> children = new ArrayList<>();
 
-        try {
-            List<String> childrenStrList = Files.readAllLines(Paths.get(childrenFilepath));
-            for (String childStr : childrenStrList) {
+        try(BufferedReader br = new BufferedReader(new FileReader(childrenFilepath))) {
+            String childStr;
+            while ((childStr = br.readLine()) != null) {
                 try {
                     children.add(childParser.parseChildFromString(childStr));
                 } catch (ChildParseException e) {

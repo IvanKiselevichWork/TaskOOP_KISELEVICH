@@ -6,6 +6,8 @@ import by.kiselevich.task1.entity.toy.Toy;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -31,9 +33,9 @@ public class ToyFileReader {
     public List<Toy> readToys() {
         List<Toy> toys = new ArrayList<>();
 
-        try {
-            List<String> toysStrList = Files.readAllLines(Paths.get(toyFilepath));
-            for (String toysStr : toysStrList) {
+        try(BufferedReader br = new BufferedReader(new FileReader(toyFilepath))) {
+            String toysStr;
+            while ((toysStr = br.readLine()) != null) {
                 try {
                     toys.addAll(toyParser.parseToysFromString(toysStr));
                 } catch (ToyParseException e) {

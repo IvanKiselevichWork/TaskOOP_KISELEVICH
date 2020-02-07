@@ -24,4 +24,23 @@ public class ChildRepositoryImpl implements ChildRepository {
     public List<Child> query(Specification<Child> specification) {
         return specification.query(this);
     }
+
+    @Override
+    public void add(Child child) {
+        children.add(child);
+    }
+
+    @Override
+    public void remove(Child child) {
+        children.remove(child);
+    }
+
+    @Override
+    public void update(Child child) {
+        for (int i = 0; i < children.size(); i++) {
+            if (children.get(i).getId() == child.getId()) {
+                children.set(i, child);
+            }
+        }
+    }
 }
